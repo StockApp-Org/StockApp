@@ -1,11 +1,15 @@
-#formDiv {
-    text-align: center;
-    height: 100vh;
-    width: auto;
+.formDiv {
+    border: 2px solid black;
+    border-radius: 5px;
+    background: linear-gradient(90deg, white, black);
 }
 
 form {
-    padding-top: 15px;
+    padding: 15px;
+}
+
+form.input[type="text"] {
+    text-align: center;
 }
 
 input[type="submit"] {
