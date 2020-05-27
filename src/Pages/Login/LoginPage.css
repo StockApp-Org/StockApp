@@ -1,0 +1,13 @@
+#formDiv {
+    text-align: center;
+    height: 100vh;
+    width: auto;
+}
+
+form {
+    padding-top: 15px;
+}
+
+input[type="submit"] {
+    border-radius: 5px;
+}

@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
 import Container from 'react-bootstrap/Container';
+import LoginPage from './Pages/Login/LoginPage';
 
 let App = () => {
   return (
-    <Container>
-      Rendered with bootstrap for react
+    <Container fluid>
+      <LoginPage/>
     </Container>
   );
 }
