@@ -1,8 +1,24 @@
-import React from 'react';
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import './LoginPage.css';
+import HomePage from '../Home/HomePage';
+import App from '../../App';
 
-let LoginPage = () => {
+class LoginPage extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.signIn = this.signIn.bind(this);
+    }
+
+    signIn = () =>{
+        App.bind(this.signIn);
+        ReactDOM.render(<HomePage/>, document.getElementById("root"));
+    }
+
+    render() {
     return (
         <Container>
             <Row>
@@ -16,7 +32,7 @@ let LoginPage = () => {
             </Row>
             <Row>
                 <Col lg={5} id = "loginDiv" className="form-div border top-padding-5">
-                    <form method="POST" id="loginForm">
+                    <form onSubmit={this.signIn} id="loginForm">
                         <Form.Row>
                             <input type="text" name="email" placeholder="E-Mail"></input>
                         </Form.Row>
@@ -46,8 +62,14 @@ let LoginPage = () => {
                     </form>
                 </Col>
             </Row>
+            <Row>
+                <Col>
+                    <input type="button" onClick={this.signIn}></input>
+                </Col>
+            </Row>
         </Container>
-    );
+        );
+    }
 }
 
 export default LoginPage;
