@@ -11,6 +11,15 @@
     color: white;
 }
 
+@keyframes formDivTransition {
+    from {display: none;}
+    to {display: block;}
+}
+
 .formDiv {
     text-align: center;
+    animation-name: formDivTransition;
+    animation-duration: 2s;
+    animation-iteration-count: none;
+    animation-timing-function: ease-in;
 }

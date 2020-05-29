@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import './LoginPage.css';
 import HomePage from '../Home/HomePage';
-import App from '../../App';
 
 class LoginPage extends Component {
 
@@ -14,7 +13,6 @@ class LoginPage extends Component {
     }
 
     signIn = () =>{
-        App.bind(this.signIn);
         ReactDOM.render(<HomePage/>, document.getElementById("root"));
     }
 
