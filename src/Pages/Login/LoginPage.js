@@ -32,37 +32,46 @@ class LoginPage extends Component {
                 <Col lg={5} id = "loginDiv" className="form-div border top-padding-5">
                     <form onSubmit={this.signIn} id="loginForm">
                         <Form.Row>
+                            <Col lg={{offset: 3, span: 5}}>
                             <input type="text" name="email" placeholder="E-Mail"></input>
+                            </Col>
                         </Form.Row>
                         <Form.Row>
-                            <input type="password" name="loginPassword" placeholder="Password"></input>
+                            <Col lg={{offset: 3, span: 5}}>
+                                <input type="password" name="loginPassword" placeholder="Password"></input>
+                            </Col>
                         </Form.Row>
                         <Form.Row>
-                            <input type="submit" value="Login"></input>
+                            <Col lg={{offset: 3, span: 5}}>
+                                <input type="submit" value="Login"></input>
+                            </Col>
                         </Form.Row>
                     </form>
                 </Col>
                 <Col lg={2}></Col>
-                <Col lg={5} id="signUpDiv" className="form-div border top-padding-5">
+                <Col lg={5} id="signUpDiv" className="form-div border top-padding-5 display-block">
                     <form method="POST" id="signUpForm">
                         <Form.Row>
-                            <input type="text" name="email" placeholder="E-Mail"></input>
+                            <Col lg={{offset: 3, span: 5}}>
+                                <input type="text" name="email" placeholder="E-Mail"></input>
+                            </Col>
                         </Form.Row>
                         <Form.Row>
-                            <input type="password" name="signUpPassword" placeholder="Password"></input>
+                            <Col lg={{offset: 3, span: 5}}>
+                                <input type="password" name="signUpPassword" placeholder="Password"></input>
+                            </Col>
                         </Form.Row>
                         <Form.Row>
-                            <input type="password" name="verifyPassword" placeholder="Verify Password"></input>
+                            <Col lg={{offset: 3, span: 5}}>
+                                <input type="password" name="verifyPassword" placeholder="Verify Password"></input>
+                            </Col>
                         </Form.Row>
                         <Form.Row>
-                            <input type="submit" value="Sign Up"></input>
+                            <Col lg={{offset: 3, span: 5}}>
+                                <input type="submit" value="Sign Up"></input>
+                            </Col>
                         </Form.Row>
                     </form>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <input type="button" onClick={this.signIn}></input>
                 </Col>
             </Row>
         </Container>
