@@ -47,6 +47,7 @@ class LoginPage extends Component {
                             </Col>
                         </Form.Row>
                     </form>
+                    <a href="/">Forgot your password? Click here!</a>
                 </Col>
                 <Col lg={2}></Col>
                 <Col lg={5} id="signUpDiv" className="form-div border top-padding-5 display-block">

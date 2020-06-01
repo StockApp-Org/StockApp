@@ -10,3 +10,19 @@
 .header {
     color: white;
 }
+
+input[type="text"], input[type="password"] {
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    border-radius: 10px;
+}
+
+.form-row {
+    padding-bottom: 3px;
+}
+
+a {
+    color: white !important;
+}
