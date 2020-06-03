@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import './LoginPage.css';
-import HomePage from '../Home/HomePage';
+import '../Styles/LoginPage.css';
+import HomePage from '../../Home/Components/HomePage';
+import Person from '../../../Objects/Person';
 
 class LoginPage extends Component {
 
@@ -13,7 +14,7 @@ class LoginPage extends Component {
     }
 
     signIn = () =>{
-        ReactDOM.render(<HomePage/>, document.getElementById("root"));
+        ReactDOM.render(<HomePage Person={new Person("Daniel", 26, '../../../Objects/default-user.png')}/>, document.getElementById("root"));
     }
 
     render() {
