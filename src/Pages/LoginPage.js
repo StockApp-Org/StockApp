@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import '../Styles/LoginPage.css';
-import HomePage from '../../Home/Components/HomePage';
-import Person from '../../../Objects/Person';
+import HomePage from './HomePage';
+import Person from '../Objects/Person';
 
 class LoginPage extends Component {
 

@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import {Container, Row, Col, Toast} from 'react-bootstrap';
-import Menu from '../../Menu/Components/Menu';
+import Menu from '../Components/Menu';
 import '../Styles/HomePage.css';
 
 let HomePage = (props) => {
 
     const p = props.Person;
     const {Name, Age, ImgUrl} = p;
-    console.log({ImgUrl});
     const [showToast, setShowToast] = useState(true);
     const toggleToast = () => setShowToast(!showToast);
 
