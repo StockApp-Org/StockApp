@@ -1,0 +1,19 @@
+#MenuContainer{
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: rgb(124, 124, 89);
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    padding: 10px;
+    width: 150px;
+}
+
+#MenuContainer a {
+ margin-top: 10px;
+}
+
+#logo{
+    height: 100px;
+    width: 100px;
+}
