@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Container from 'react-bootstrap/Container';
-import LoginPage from './Pages/Login/LoginPage';
+import LoginPage from './Pages/LoginPage';
 
 class App extends Component {
 
