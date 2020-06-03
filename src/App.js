@@ -7,9 +7,9 @@ class App extends Component {
 
   render() {
     return (
-      <Container fluid>
-        <LoginPage/>
-      </Container>
+          <Container fluid>
+             <LoginPage/>
+           </Container>
     );
   }
 }
