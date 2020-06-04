@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import './LoginPage.css';
-import HomePage from '../Home/HomePage';
+import '../Styles/LoginPage.css';
+import HomePage from './HomePage';
+import Person from '../Objects/Person';
+import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'; 
+import MyPage from '../Pages/MyPage';
+
 
 class LoginPage extends Component {
 
@@ -13,7 +17,17 @@ class LoginPage extends Component {
     }
 
     signIn = () =>{
-        ReactDOM.render(<HomePage/>, document.getElementById("root"));
+        ReactDOM.render(
+        <Router>
+            <Switch>
+            <Route path="/Home" exact component={MyPage} />
+            <Route path="/Portfolio" exact component={MyPage} />
+            <Route path="/MyPage" exact component={MyPage} />
+            <Route path="/Settings" exact component={MyPage} />
+        </Switch>
+            <HomePage Person={new Person("Daniel", 26, '../../../Objects/default-user.png')}/>
+            </Router>
+            , document.getElementById("root"));
     }
 
     render() {
