@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import '../Styles/LoginPage.css';
+import * as pages from './';
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'; 
 import HomePage from './HomePage';
-import Person from '../Objects/Person';
-import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'; 
-import MyPage from '../Pages/MyPage';
 
 
 class LoginPage extends Component {
@@ -15,18 +14,17 @@ class LoginPage extends Component {
 
         this.signIn = this.signIn.bind(this);
     }
-
     signIn = () =>{
         ReactDOM.render(
         <Router>
             <Switch>
-            <Route path="/Home" exact component={MyPage} />
-            <Route path="/Portfolio" exact component={MyPage} />
-            <Route path="/MyPage" exact component={MyPage} />
-            <Route path="/Settings" exact component={MyPage} />
-        </Switch>
-            <HomePage Person={new Person("Daniel", 26, '../../../Objects/default-user.png')}/>
-            </Router>
+                <Route path="/Home" exact component={pages.HomePage} />
+                <Route path="/Portfolio" exact component={pages.MyPage} />
+                <Route path="/MyPage" exact component={pages.MyPage} />
+                <Route path="/Settings" exact component={pages.MyPage} />
+            </Switch>
+            <HomePage/>
+        </Router>
             , document.getElementById("root"));
     }
 
@@ -65,7 +63,7 @@ class LoginPage extends Component {
                 </Col>
                 <Col lg={2}></Col>
                 <Col lg={5} id="signUpDiv" className="form-div border top-padding-5 display-block">
-                    <form method="POST" id="signUpForm">
+                    <form onSubmit={this.signIn} id="signUpForm">
                         <Form.Row>
                             <Col lg={{offset: 3, span: 5}}>
                                 <input type="text" name="email" placeholder="E-Mail"></input>

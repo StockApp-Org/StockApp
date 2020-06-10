@@ -3,6 +3,11 @@ class Person {
         this.Name = name;
         this.Age = age;
         this.ImgUrl = imgUrl;
+        this.Id = null;
+    }
+
+    setId(id) {
+        this.Id = id;
     }
 }
 
