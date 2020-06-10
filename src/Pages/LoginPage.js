@@ -1,34 +1,31 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import '../Styles/LoginPage.css';
-import * as pages from './';
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'; 
 import HomePage from './HomePage';
+import MyPage from './MyPage'
+import ReactDOM from 'react-dom'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import App from '../App';
 
 
-class LoginPage extends Component {
+let LoginPage = () => {
 
-    constructor(props) {
-        super(props);
-
-        this.signIn = this.signIn.bind(this);
-    }
-    signIn = () =>{
+    
+    const signIn = () =>{
         ReactDOM.render(
-        <Router>
+            <Router>
             <Switch>
-                <Route path="/Home" exact component={pages.HomePage} />
-                <Route path="/Portfolio" exact component={pages.MyPage} />
-                <Route path="/MyPage" exact component={pages.MyPage} />
-                <Route path="/Settings" exact component={pages.MyPage} />
+                <Route path="/Home" exact component={HomePage}/>
+                <Route path="/Portfolio" exact component={MyPage} />
+                <Route path="/MyPage" exact component={MyPage} />
+                <Route path="/Settings" exact component={MyPage} />
             </Switch>
-            <HomePage/>
-        </Router>
-            , document.getElementById("root"));
+            <App newPage={<HomePage/>}/>
+            </Router>,
+            document.getElementById('root')
+        );
     }
 
-    render() {
     return (
         <Container>
             <Row>
@@ -42,7 +39,7 @@ class LoginPage extends Component {
             </Row>
             <Row>
                 <Col lg={5} id = "loginDiv" className="form-div border top-padding-5">
-                    <form onSubmit={this.signIn} id="loginForm">
+                    <form onSubmit={signIn} id="loginForm">
                         <Form.Row>
                             <Col lg={{offset: 3, span: 5}}>
                             <input type="text" name="email" placeholder="E-Mail"></input>
@@ -63,7 +60,7 @@ class LoginPage extends Component {
                 </Col>
                 <Col lg={2}></Col>
                 <Col lg={5} id="signUpDiv" className="form-div border top-padding-5 display-block">
-                    <form onSubmit={this.signIn} id="signUpForm">
+                    <form onSubmit={signIn} id="signUpForm">
                         <Form.Row>
                             <Col lg={{offset: 3, span: 5}}>
                                 <input type="text" name="email" placeholder="E-Mail"></input>
@@ -89,7 +86,6 @@ class LoginPage extends Component {
             </Row>
         </Container>
         );
-    }
 }
 
 export default LoginPage;

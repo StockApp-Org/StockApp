@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Styles/App.css';
-import Container from 'react-bootstrap/Container';
-import LoginPage from './Pages/LoginPage';
+import {Container} from 'react-bootstrap';
 
-class App extends Component {
-
-  render() {
+let App = ({newPage}) => {
     return (
           <Container fluid>
-             <LoginPage/>
+            {newPage}
            </Container>
     );
-  }
 }
 
 export default App;

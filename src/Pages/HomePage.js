@@ -70,6 +70,18 @@ let HomePage = (props) => {
                             </Row>
                         </Container>
                     </Col>
+                    <Col lg={6} md={8}>
+                            <Container id="portfolioOverviewSection">
+                                <Row>
+                                    <Col lg={5}>
+                                        <h4>Min Portfölj</h4>
+                                    </Col>
+                                    <Col lg={{offset: 3, span: 4}}>
+                                        <Button variant="secondary">Detaljerad Översikt</Button>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        </Col>
                 </Row>
             </Col>
         </Row>
