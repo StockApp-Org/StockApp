@@ -11,3 +11,12 @@ header {
   color:rgba(253, 190, 63, 0.9);
   text-shadow: 1px 1px 1px white;
 }
+
+.router{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pageContent{
+  
+}
