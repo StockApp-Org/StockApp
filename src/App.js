@@ -7,6 +7,7 @@ import HomePage from './Pages/HomePage';
 import Menu from './Components/Menu'
 import Header from './Components/Header'
 import Footer from './Components/Footer'
+import SettingsPage from './Pages/SettingsPage'
 
 const notFound = () => (<><h1>404</h1><Link to="/">Go back</Link></>)
 
@@ -21,7 +22,9 @@ const App = () => {
                         <Switch>
                             <Route path="/" component={LoginPage} exact={true} />
                             <Route path="/homepage" component={HomePage} exact={true}/>
-                            <Route path="/homepage" component={HomePage} exact={true}/>
+                            <Route path="/settings" component={SettingsPage} exact={true}/>
+                            <Route path="/passwordchange" component={SettingsPage} exact={true}/>
+                            <Route path="/prefrences" component={SettingsPage} exact={true}/>
                             <Route component={notFound}/>
                         </Switch>
                    </div>
