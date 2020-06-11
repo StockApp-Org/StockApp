@@ -2,20 +2,9 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import '../Styles/LoginPage.css';
-import HomePage from './HomePage';
-import Person from '../Objects/Person';
+import { Link } from 'react-router-dom'
 
 class LoginPage extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.signIn = this.signIn.bind(this);
-    }
-
-    signIn = () =>{
-        ReactDOM.render(<HomePage Person={new Person("Daniel", 26, '../../../Objects/default-user.png')}/>, document.getElementById("root"));
-    }
 
     render() {
     return (
@@ -31,7 +20,8 @@ class LoginPage extends Component {
             </Row>
             <Row>
                 <Col lg={5} id = "loginDiv" className="form-div border top-padding-5">
-                    <form onSubmit={this.signIn} id="loginForm">
+                    <form onSubmit={<Link to="/homepage">Log in</Link>} id="loginForm">
+                    <Link to="/homepage"> Home page</Link>
                         <Form.Row>
                             <Col lg={{offset: 3, span: 5}}>
                             <input type="text" name="email" placeholder="E-Mail"></input>
