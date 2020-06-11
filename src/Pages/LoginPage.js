@@ -1,31 +1,12 @@
 import React from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import '../Styles/LoginPage.css';
-import HomePage from './HomePage';
-import MyPage from './MyPage'
-import ReactDOM from 'react-dom'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import App from '../App';
+import { Link } from 'react-router-dom'
+import { Component } from 'react';
 
+class LoginPage extends Component {
 
-let LoginPage = () => {
-
-    
-    const signIn = () =>{
-        ReactDOM.render(
-            <Router>
-            <Switch>
-                <Route path="/Home" exact component={HomePage}/>
-                <Route path="/Portfolio" exact component={MyPage} />
-                <Route path="/MyPage" exact component={MyPage} />
-                <Route path="/Settings" exact component={MyPage} />
-            </Switch>
-            <App newPage={<HomePage/>}/>
-            </Router>,
-            document.getElementById('root')
-        );
-    }
-
+    render() {
     return (
         <Container>
             <Row>
@@ -39,7 +20,8 @@ let LoginPage = () => {
             </Row>
             <Row>
                 <Col lg={5} id = "loginDiv" className="form-div border top-padding-5">
-                    <form onSubmit={signIn} id="loginForm">
+                    <form onSubmit={<Link to="/homepage">Log in</Link>} id="loginForm">
+                    <Link to="/homepage"> Home page</Link>
                         <Form.Row>
                             <Col lg={{offset: 3, span: 5}}>
                             <input type="text" name="email" placeholder="E-Mail"></input>
@@ -60,7 +42,7 @@ let LoginPage = () => {
                 </Col>
                 <Col lg={2}></Col>
                 <Col lg={5} id="signUpDiv" className="form-div border top-padding-5 display-block">
-                    <form onSubmit={signIn} id="signUpForm">
+                    <form onSubmit={console.log("Sign Up")} id="signUpForm">
                         <Form.Row>
                             <Col lg={{offset: 3, span: 5}}>
                                 <input type="text" name="email" placeholder="E-Mail"></input>
@@ -86,6 +68,7 @@ let LoginPage = () => {
             </Row>
         </Container>
         );
+    }
 }
 
 export default LoginPage;
