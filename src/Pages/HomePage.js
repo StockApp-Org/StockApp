@@ -15,7 +15,6 @@ let HomePage = (props) => {
         <h1>Home Page</h1>
         <Row>
             <Col lg={2}>
-                <Menu />
             </Col>
             <Col lg={10}>
                 <Container>
