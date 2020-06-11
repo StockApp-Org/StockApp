@@ -1,7 +1,7 @@
 import React from 'react';
-import '../Styles/Menu.css';
+import '../Styles/MenuComponent.css';
 import Logo from '../Images/logo.png';
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 class Menu extends React.Component{
 
@@ -10,12 +10,12 @@ class Menu extends React.Component{
         return(
             <div id="MenuContainer">
                 <h3>Menu</h3>
-                <Link to="/homepage">Home page</Link>
-                <Link to="/mypage">My page</Link>
-                <Link to="/settings">Settings</Link>
-                <Link to="/">Log out</Link>
+                <NavLink activeClassName="isActive" to="/homepage">Home page</NavLink>
+                <NavLink activeClassName="isActive" to="/mypage">My page</NavLink>
+                <NavLink activeClassName="isActive" to="/settings">Settings</NavLink>
+                <NavLink activeClassName="isActive" to="/" exact={true}>Log out</NavLink>
                                                
-                <img id="logo" src={Logo} alt="Logo here"></img>
+                <img id="logo" src={Logo} alt="Logo"></img>
             </div>
         );
     }

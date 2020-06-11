@@ -11,12 +11,17 @@ header {
   color:rgba(253, 190, 63, 0.9);
   text-shadow: 1px 1px 1px white;
 }
-
-.router{
-  display: flex;
-  flex-wrap: wrap;
+footer{
+  text-align: center;
 }
 
 .pageContent{
-  
+  display: flex;
+  background-color: slategray;
+  border: 3px solid red;
+  width: 100%;
+}
+.menuWithPageContainer{
+  display: flex;
+  background-color: springgreen;
 }

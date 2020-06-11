@@ -1,3 +1,14 @@
+.isActive {
+    border: 2px solid gray;
+    color: black;
+    border-radius: 5%;
+    background-color: rgb(255, 177, 59);
+    }
+
+.settingsNavbar a{
+    color: blanchedalmond;
+}
+
 #MenuContainer{
     border-radius: 5px;
     border: 1px solid black;
@@ -11,6 +22,7 @@
 
 #MenuContainer a {
  margin-top: 10px;
+ color: blanchedalmond;
 }
 
 #logo{
