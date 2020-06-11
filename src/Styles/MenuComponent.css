@@ -1,3 +1,7 @@
+.isActive {
+    background-color: seagreen;
+}
+
 #MenuContainer{
     border-radius: 5px;
     border: 1px solid black;
