@@ -8,6 +8,8 @@ import Menu from './Components/Menu'
 import Header from './Components/Header'
 import Footer from './Components/Footer'
 import SettingsPage from './Pages/SettingsPage'
+import PasswordPage from './Pages/PasswordPage'
+import PreferencesPage from './Pages/PreferencesPage'
 
 const notFound = () => (<><h1>404</h1><Link to="/">Go back</Link></>)
 const MenuWithRouter = withRouter(Menu)
@@ -23,8 +25,8 @@ const App = () => {
                             <Route path="/" component={LoginPage} exact={true} />
                             <Route path="/homepage" component={HomePage} exact={true}/>
                             <Route path="/settings" component={SettingsPage} exact={true}/>
-                            <Route path="/passwordchange" component={SettingsPage} exact={true}/>
-                            <Route path="/prefrences" component={SettingsPage} exact={true}/>
+                            <Route path="/passwordchange" component={PasswordPage} exact={true}/>
+                            <Route path="/prefrences" component={PreferencesPage} exact={true}/>
                             <Route component={notFound}/>
                         </Switch>
                    </div>
