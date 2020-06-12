@@ -14,8 +14,8 @@ const MenuWithRouter = withRouter(Menu)
 const App = () => {
     return (
       <div className="router">
-       <BrowserRouter>
        <Header />
+       <BrowserRouter>
           <div className="menuWithPageContainer">
               <MenuWithRouter />
                     <div className="pageContent">

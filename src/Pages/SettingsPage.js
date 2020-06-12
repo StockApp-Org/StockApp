@@ -1,20 +1,26 @@
 import React from 'react'
 import SettingsNav from '../Components/SettingsNav'
+import defaultProfile from '../Images/profileDefault.png'
+import '../Styles/SettingsPage.css'
 
 const SettingsPage = () => (
-    <div>
-        <SettingsNav />
+    <div className="settingsPageAll">
 
-
+     <h3>Settings</h3>
         <div className="settingsContent">
-            <img src="" alt="profilePicture"></img>
+        <SettingsNav />
+            <img src={defaultProfile} style={{height: 90, width: 90}} alt="profilePicture"></img>
             <form>
-                <input></input>
-                <label>First name</label>
-                <input></input>
-                <label>Last name</label><br></br>
-                <input></input>
+
+                <div id="name">
+                    <label>First name</label><br></br>
+                    <input></input>
+                </div>
+                    <label>Last name</label>
+                    <input></input>
+                <div></div>
                 <label>Social security number</label><br></br>
+                <input></input><br></br>
                 <input></input>
                 <label>Adress</label><br></br>
                 <input></input>
