@@ -3,10 +3,11 @@ import '../Styles/MenuComponent.css';
 import Logo from '../Images/logo.png';
 import { NavLink } from 'react-router-dom'
 
-class Menu extends React.Component{
+  const Menu = (props) => {
 
 
-    render(){
+
+    if (props.location.pathname === '/') return null
         return(
             <div id="MenuContainer">
                 <h3>Menu</h3>
@@ -18,7 +19,6 @@ class Menu extends React.Component{
                 <img id="logo" src={Logo} alt="Logo"></img>
             </div>
         );
-    }
 }
 
 export default Menu;
