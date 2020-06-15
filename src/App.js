@@ -1,11 +1,6 @@
 import React from 'react';
-<<<<<<< HEAD
 import './Styles/App.css';
 import {Container} from 'react-bootstrap';
-=======
-import './App.css';
-import Container from 'react-bootstrap/Container';
->>>>>>> eba02eb9358b2a56431dd0183bc17ac5ccde1f97
 import LoginPage from './Pages/LoginPage';
 import { BrowserRouter, Switch, Route, Link, withRouter } from 'react-router-dom'
 import HomePage from './Pages/HomePage';
@@ -23,17 +18,6 @@ const App = () => {
       <div className="router">
        <Header />
        <BrowserRouter>
-<<<<<<< HEAD
-       <Menu />
-       <Container className="pageContent">
-          <Switch>
-              <Route path="/" component={LoginPage} exact={true} />
-              <Route path="/homepage" component={HomePage} exact={true}/>
-              <Route path="/homepage" component={HomePage} exact={true}/>
-              <Route component={notFound}/>
-          </Switch>
-       </Container>
-=======
           <div className="menuWithPageContainer">
               <MenuWithRouter />
                     <div className="pageContent">
@@ -48,7 +32,6 @@ const App = () => {
                    </div>
           </div>
        <Footer />
->>>>>>> eba02eb9358b2a56431dd0183bc17ac5ccde1f97
          
       </BrowserRouter>
       </div>

@@ -8,14 +8,6 @@ header {
   color: #ffebcd;
   text-shadow: 1px 1px 1px white;
 }
-<<<<<<< HEAD:src/Styles/App.css
-
-
-.router{
-  display: flex;
-  flex-wrap: wrap;
-}
-=======
 footer{
   text-align: center;
 }
@@ -28,4 +20,3 @@ footer{
   display: flex;
   align-content: stretch;
 }
->>>>>>> eba02eb9358b2a56431dd0183bc17ac5ccde1f97:src/App.css
