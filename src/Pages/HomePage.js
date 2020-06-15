@@ -1,11 +1,32 @@
 import React, {useState} from 'react';
 import {Container, Row, Col, Toast, Button} from 'react-bootstrap';
 import '../Styles/HomePage.css';
+import  { Pie, Cell, PieChart, Label } from 'recharts';
+import { scaleOrdinal } from 'd3-scale';
+import { schemeCategory10 } from 'd3-scale-chromatic';
 
 let HomePage = (props) => {
 
+    const colors = scaleOrdinal(schemeCategory10).range();
+
     const [showToast, setShowToast] = useState(true);
     const toggleToast = () => setShowToast(!showToast);
+    const dummyData = [
+        {name: "Group 1", value: 100},
+        {name: "Group 2", value: 200},
+        {name: "Group 3", value: 500},
+        {name: "Group 4", value: 900}
+    ];
+
+    const renderLabelContent = (props) => {
+        const { value, name, x, y, midAngle } = props;
+      
+        return (
+          <g transform={`translate(${x}, ${y})`} textAnchor={ (midAngle < -90 || midAngle >= 90) ? 'end' : 'start'}>
+            <text x={0} y={0}>{`${name}: ${value}`}</text> 
+          </g>
+        );
+    }
 
     return (
         <Row id="MainRow">
@@ -29,7 +50,7 @@ let HomePage = (props) => {
                         <Container id="MyInfoContainer">
                             <Row id="headerRow">
                                 <Col lg={4}>
-                                    <h4>Min Profil</h4>
+                                    <h4>My Profile</h4>
                                 </Col>
                                 <Col lg={{offset: 4, span: 4}}>
                                     <Button variant="secondary">Redigera</Button>
@@ -63,10 +84,39 @@ let HomePage = (props) => {
                             <Container id="portfolioOverviewSection">
                                 <Row>
                                     <Col lg={5}>
-                                        <h4>Min Portfölj</h4>
+                                        <h4>My Portfolio</h4>
                                     </Col>
                                     <Col lg={{offset: 3, span: 4}}>
                                         <Button variant="secondary">Detaljerad Översikt</Button>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col lg={12}>
+                                    <PieChart width={400} height={300} className="pieChart">
+                                        {console.log({dummyData, colors})}
+                                        <Pie
+                                        data={dummyData}
+                                        dataKey="value"
+                                        cx={200}
+                                        cy={150}
+                                        startAngle={180}
+                                        endAngle={-180}
+                                        innerRadius={60}
+                                        outerRadius={80}
+                                        label={renderLabelContent}
+
+                                        isAnimationActive={true}
+                                        >
+                                        {
+                                            dummyData.map((entry, index) => (
+                                            <Cell key={index} fill={colors[index % 10]}/>
+                                            ))
+                                        }
+                                        </Pie>
+                                        <Label width={50} position="center">
+                                            PieChart!
+                                        </Label>
+                                    </PieChart>
                                     </Col>
                                 </Row>
                             </Container>
