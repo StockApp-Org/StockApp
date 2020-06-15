@@ -40,7 +40,8 @@ class LoginPage extends Component {
                 );
             }
             else {
-                
+                document.getElementById('loginEmail').value = '';
+                document.getElementById('loginPassword').value = '';
             }
         });
     }
@@ -64,12 +65,12 @@ class LoginPage extends Component {
                             <Link to="/homepage"> Home page</Link>
                                 <Form.Row>
                                     <Col lg={{offset: 3, span: 5}}>
-                                    <input type="text" name="email" placeholder="E-Mail"></input>
+                                    <input id="loginEmail" type="text" name="email" placeholder="E-Mail"></input>
                                     </Col>
                                 </Form.Row>
                                 <Form.Row>
                                     <Col lg={{offset: 3, span: 5}}>
-                                        <input type="password" name="loginPassword" placeholder="Password"></input>
+                                        <input id="loginPassword" type="password" name="loginPassword" placeholder="Password"></input>
                                     </Col>
                                 </Form.Row>
                                 <Form.Row>
