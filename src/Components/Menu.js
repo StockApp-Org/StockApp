@@ -5,8 +5,6 @@ import { NavLink } from 'react-router-dom'
 
   const Menu = (props) => {
 
-
-
     if (props.location.pathname === '/') return null
     
         return(

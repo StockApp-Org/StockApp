@@ -31,7 +31,7 @@ class LoginPage extends Component {
         fetch("https://localhost:5001/user/SignIn", req)
         .then(response => response.json())
         .then(data => {
-            if (data !== 0) {
+            if (data > 0) {
                 this.setState({signedIn: data});
                 this.props.history.push({
                     pathname: '/homepage',

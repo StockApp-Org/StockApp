@@ -3,9 +3,10 @@ import SettingsNav from '../Components/SettingsNav'
 import defaultProfile from '../Images/profileDefault.png'
 import '../Styles/SettingsPage.css'
 
-const SettingsPage = () => (
-    <div className="settingsPageAll">
+let SettingsPage = () => {
 
+    return (
+    <div className="settingsPageAll">
      <h3>Settings</h3>
         <div className="settingsContent">
         <SettingsNav />
@@ -44,6 +45,7 @@ const SettingsPage = () => (
             </form>
         </div>
     </div>
-)
+    );
+}
 
 export default SettingsPage
