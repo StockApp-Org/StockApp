@@ -5,9 +5,49 @@ import { Link } from 'react-router-dom'
 
 class LoginPage extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            signedIn: 0
+        }
+    }
+    
+    signIn(e) {
+        e.preventDefault();
+        var email= e.target["email"].value
+        var password = e.target["loginPassword"].value;
+
+        var formData = new FormData();
+        formData.append('Email', email);
+        formData.append('Password', password);
+
+        var req = {
+            method: 'POST',
+            //headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: formData
+        };
+
+        fetch("https://localhost:5001/user/SignIn", req)
+        .then(response => response.json())
+        .then(data => {
+            if (data !== 0) {
+                this.setState({signedIn: data});
+                this.props.history.push({
+                    pathname: '/homepage',
+                    userId: data
+                }
+                );
+            }
+            else {
+                
+            }
+        });
+    }
+
     render() {
     return (
-        <div className="loginPageContainer">
+        <Container className="loginPageContainer">
                 <Container>
                     <Row>
                         <Col lg={5} className="header" id="loginHeader">
@@ -20,7 +60,7 @@ class LoginPage extends Component {
                     </Row>
                     <Row>
                         <Col lg={5} id = "loginDiv" className="form-div border top-padding-5">
-                            <form onSubmit={<Link to="/homepage">Log in</Link>} id="loginForm">
+                            <form onSubmit={this.signIn.bind(this)} id="loginForm">
                             <Link to="/homepage"> Home page</Link>
                                 <Form.Row>
                                     <Col lg={{offset: 3, span: 5}}>
@@ -67,9 +107,9 @@ class LoginPage extends Component {
                         </Col>
                     </Row>
                 </Container>
-        </div>
+        </Container>
         );
-    }
+    }    
 }
 
 export default LoginPage;

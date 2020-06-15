@@ -9,6 +9,7 @@ let HomePage = (props) => {
 
     const colors = scaleOrdinal(schemeCategory10).range();
 
+    const [userId, setUserId] = useState(props.location.userId);
     const [showToast, setShowToast] = useState(true);
     const toggleToast = () => setShowToast(!showToast);
     const dummyData = [
@@ -29,12 +30,9 @@ let HomePage = (props) => {
     }
 
     return (
+        <Container fluid>
         <Row id="MainRow">
-        <h1>Home Page</h1>
-            <Col lg={2}>
-            </Col>
-            <Col id="mainContentColumn" lg={10}>
-                <Container id="toastContainer">
+            <Col id="mainContentColumn">
                     <Row>
                         <Col lg={3} md={5} sm={12}>
                             <Toast show={showToast} onClose={toggleToast}>
@@ -44,7 +42,6 @@ let HomePage = (props) => {
                             </Toast>
                         </Col>
                     </Row>
-                </Container>
                 <Row id="mainContentRow">
                     <Col lg={6} md={8}>
                         <Container id="MyInfoContainer">
@@ -93,7 +90,6 @@ let HomePage = (props) => {
                                 <Row>
                                     <Col lg={12}>
                                     <PieChart width={400} height={300} className="pieChart">
-                                        {console.log({dummyData, colors})}
                                         <Pie
                                         data={dummyData}
                                         dataKey="value"
@@ -124,6 +120,7 @@ let HomePage = (props) => {
                 </Row>
             </Col>
         </Row>
+        </Container>
     )
 };
 
