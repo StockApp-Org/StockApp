@@ -1,6 +1,5 @@
 import React from 'react';
 import './Styles/App.css';
-import {Container} from 'react-bootstrap';
 import LoginPage from './Pages/LoginPage';
 import { BrowserRouter, Switch, Route, Link, withRouter } from 'react-router-dom'
 import HomePage from './Pages/HomePage';
