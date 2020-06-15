@@ -40,8 +40,12 @@ class LoginPage extends Component {
                 );
             }
             else {
-                document.getElementById('loginEmail').value = '';
-                document.getElementById('loginPassword').value = '';
+                var loginEmailEl = document.getElementById('loginEmail');
+                var loginPasswordEl = document.getElementById('loginPassword');
+                loginEmailEl.value = '';
+                loginEmailEl.classList.add('failed');
+                loginPasswordEl.value = '';
+                loginPasswordEl.classList.add('failed');
             }
         });
     }
