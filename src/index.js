@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './Styles/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import LoginPage from './Pages/LoginPage';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App newPage={<LoginPage/>}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
