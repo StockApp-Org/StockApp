@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import './App.css';
-import Container from 'react-bootstrap/Container';
+import React from 'react';
+import './Styles/App.css';
+import {Container} from 'react-bootstrap';
 import LoginPage from './Pages/LoginPage';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import HomePage from './Pages/HomePage';
@@ -13,14 +13,14 @@ const App = () => {
       <div className="router">
        <BrowserRouter>
        <Menu />
-       <div className="pageContent">
+       <Container className="pageContent">
           <Switch>
               <Route path="/" component={LoginPage} exact={true} />
               <Route path="/homepage" component={HomePage} exact={true}/>
               <Route path="/homepage" component={HomePage} exact={true}/>
               <Route component={notFound}/>
           </Switch>
-       </div>
+       </Container>
          
       </BrowserRouter>
       </div>
