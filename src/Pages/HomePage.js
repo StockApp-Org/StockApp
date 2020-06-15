@@ -1,25 +1,15 @@
 import React, {useState} from 'react';
 import {Container, Row, Col, Toast, Button} from 'react-bootstrap';
-import Menu from '../Components/Menu';
 import '../Styles/HomePage.css';
-import img from '../Data/ProfilePics/DSC_0066.JPG';
-import Person from '../Objects/Person';
 
 let HomePage = (props) => {
 
-    const p = props.Person;
-    // const {Name, Age, ImgUrl} = p;
     const [showToast, setShowToast] = useState(true);
     const toggleToast = () => setShowToast(!showToast);
-    // Dummy Person Object for testing
-    p.setId("19931211-5299");
-
-    console.log(p);
 
     return (
-    <Container id="mainHomeContainer">
-        <h1>Home Page</h1>
         <Row id="MainRow">
+        <h1>Home Page</h1>
             <Col lg={2}>
             </Col>
             <Col id="mainContentColumn" lg={10}>
@@ -47,12 +37,12 @@ let HomePage = (props) => {
                             </Row>
                             <Row>
                                 <Col lg={4}>
-                                    <img id="profileImg" src={p.ImgUrl.img} alt=""></img>
+                                    <img id="profileImg" alt=""></img>
                                 </Col>
                                 <Col lg={8}>
                                     <Row>
                                         <Col>
-                                            <h3>{p.Name}</h3>
+                                            <h3>Name Here</h3>
                                         </Col>
                                     </Row>
                                     <Row>
@@ -62,7 +52,7 @@ let HomePage = (props) => {
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <p>{p.Id}</p>
+                                            <p>Person/Org Nr here</p>
                                         </Col>
                                     </Row>
                                 </Col>
@@ -84,7 +74,6 @@ let HomePage = (props) => {
                 </Row>
             </Col>
         </Row>
-    </Container>
     )
 };
 

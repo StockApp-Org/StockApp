@@ -1,6 +1,6 @@
 import React from 'react';
 import '../Styles/Menu.css';
-import Logo from '../Images/logo.png';
+import Logo from '../Data/Images/logo.png';
 import { Link } from 'react-router-dom'
 
 class Menu extends React.Component{
