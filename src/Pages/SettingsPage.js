@@ -7,17 +7,26 @@ const SettingsPage = () => {
 
 
     const [userData, setUserData] = useState();
+    const [firstName, setSetFirstName] = useState();
+
     useEffect(() => {
         fetch("https://localhost:5001/user/5")
       .then(res => res.json())
       .then(result => {
             setUserData(result);
+            setSetFirstName(result.firstName)
         },
         (error) => {
           console.log(error)
           });
         }
-    , [])
+    , []);
+
+    const handleChange = (e) => {
+        
+        console.log(e.target.name)
+        
+    };
 
     return (
         
@@ -32,31 +41,31 @@ const SettingsPage = () => {
                <div className="settingsRow">
                    <div>
                        <label>First Name</label><br></br>
-                       <input value={userData && userData.firstName ? userData.firstName : "No info"}></input>
+                       <input name="firstName" onChange={handleChange} value={firstName}></input>
                    </div>
                    <div>
                        <label>Last name</label><br></br>
-                       <input value={userData && userData.lastName ? userData.lastName : "No info" }></input>
+                       <input onChange={handleChange} value={userData && userData.lastName ? userData.lastName : "No info" }></input>
                    </div>
                </div>
                <label>Social security number</label><br></br>
-               <input value={userData && userData.personNr ? userData.personNr : "No info" }></input><br></br>
-               <label>Adress</label><br></br>
-               <input></input><br></br>
+               <input onChange={handleChange} value={userData && userData.personNr ? userData.personNr : "No info" }></input><br></br>
+               <label>Address</label><br></br>
+               <input onChange={handleChange}></input><br></br>
                <div className="settingsRow">
                    <div>
                        <label>Zip code</label><br></br>
-                       <input></input>
+                       <input onChange={handleChange}></input>
                    </div>
                    <div>
                        <label>City</label><br></br>
-                       <input></input>
+                       <input onChange={handleChange}></input>
                    </div>
                </div>
                <label>Phone number</label><br></br>
-               <input></input><br></br>
+               <input onChange={handleChange}></input><br></br>
                <label>Email</label><br></br>
-               <input value={userData && userData.email ? userData.email : "No info" }></input>
+               <input onChange={handleChange} value={userData && userData.email ? userData.email : "No info" }></input>
                <input type="submit"></input>
            </form>
        </div>
