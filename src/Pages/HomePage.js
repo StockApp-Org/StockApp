@@ -41,7 +41,7 @@ let HomePage = (props) => {
     }
 
     return (
-        <Container fluid>
+        <Container fluid className="allPageContent">
         <Row id="MainRow">
             <Col id="mainContentColumn">
                     <Row>
