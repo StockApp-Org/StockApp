@@ -13,19 +13,6 @@
 }
 
 .pieChart {
-    width: 100%;
-    height: 100%;
-}
-
-.allPageContent{
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(131, 131, 131);
-    margin-left: 50px;
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 33px 18px rgba(115,114,115,1);
--moz-box-shadow: 0px 0px 33px 18px rgba(115,114,115,1);
-box-shadow: 0px 0px 33px 18px rgba(115,114,115,1);
+    width: 600px;
+    height: 400px;
 }
