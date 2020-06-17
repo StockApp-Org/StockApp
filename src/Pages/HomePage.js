@@ -62,7 +62,7 @@ let HomePage = (props) => {
                                 <Col lg={4}>
                                     <h4>My Profile</h4>
                                 </Col>
-                                <Col lg={{offset: 4, span: 4}}>
+                                <Col lg={{offset: 6, span: 2}}>
                                     <Button variant="secondary" onClick={loadSettings}>Edit</Button>
                                 </Col>
                             </Row>
@@ -96,7 +96,7 @@ let HomePage = (props) => {
                                     <Col lg={5}>
                                         <h4>My Portfolio</h4>
                                     </Col>
-                                    <Col lg={{offset: 3, span: 4}}>
+                                    <Col lg={{offset: 5, span: 2}}>
                                         <Button variant="secondary">Details</Button>
                                     </Col>
                                 </Row>
@@ -107,8 +107,8 @@ let HomePage = (props) => {
                                         <Pie
                                         data={data}
                                         dataKey="value"
-                                        cx={200}
-                                        cy={150}
+                                        cx={400}
+                                        cy={175}
                                         startAngle={180}
                                         endAngle={-180}
                                         innerRadius={60}
