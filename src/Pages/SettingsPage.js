@@ -37,7 +37,6 @@ const SettingsPage = () => {
        <SettingsNav />
            <img src={defaultProfile} style={{height: 90, width: 90}} alt="profilePicture"></img>
            <form>
-
                <div className="settingsRow">
                    <div>
                        <label>First Name</label><br></br>

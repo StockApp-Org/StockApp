@@ -4,12 +4,13 @@ import '../Styles/HomePage.css';
 import  { Pie, Cell, PieChart, Label } from 'recharts';
 import { scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
+import defaultProfile from '../Images/profileDefault.png'
+
 
 let HomePage = (props) => {
 
     const colors = scaleOrdinal(schemeCategory10).range();
-
-    const [userId, setUserId] = useState(props.location.userId);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('current_user')));
     const [showToast, setShowToast] = useState(true);
     const toggleToast = () => setShowToast(!showToast);
     const dummyData = [
@@ -18,6 +19,16 @@ let HomePage = (props) => {
         {name: "Group 3", value: 500},
         {name: "Group 4", value: 900}
     ];
+
+    
+    /*useEffect(() => {
+        fetch("https://localhost:5001/user/"+userId)
+        .then(response => response.json())
+        .then(data => {
+            setUser(data)
+            setLoading(false);
+        });
+    }, [isLoading, user, userId]);*/
 
     const renderLabelContent = (props) => {
         const { value, name, x, y, midAngle } = props;
@@ -37,7 +48,7 @@ let HomePage = (props) => {
                         <Col lg={3} md={5} sm={12}>
                             <Toast show={showToast} onClose={toggleToast}>
                                 <Toast.Header>
-                                    <h5>Hello</h5>
+                                    <h5>Hello {user.fullName}</h5>
                                 </Toast.Header>
                             </Toast>
                         </Col>
@@ -50,17 +61,17 @@ let HomePage = (props) => {
                                     <h4>My Profile</h4>
                                 </Col>
                                 <Col lg={{offset: 4, span: 4}}>
-                                    <Button variant="secondary">Redigera</Button>
+                                    <Button variant="secondary">Edit</Button>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col lg={4}>
-                                    <img id="profileImg" alt=""></img>
+                                    <img src={user.imgUrl == null ? defaultProfile : user.imgUrl} id="profileImg" alt=""></img>
                                 </Col>
                                 <Col lg={8}>
                                     <Row>
                                         <Col>
-                                            <h3>Name Here</h3>
+                                            <h3>{user.fullName}</h3>
                                         </Col>
                                     </Row>
                                     <Row>
@@ -70,7 +81,7 @@ let HomePage = (props) => {
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <p>Person/Org Nr here</p>
+                                            <p>{user.personNr}/{user.orgNr}</p>
                                         </Col>
                                     </Row>
                                 </Col>
@@ -84,7 +95,7 @@ let HomePage = (props) => {
                                         <h4>My Portfolio</h4>
                                     </Col>
                                     <Col lg={{offset: 3, span: 4}}>
-                                        <Button variant="secondary">Detaljerad Översikt</Button>
+                                        <Button variant="secondary">Details</Button>
                                     </Col>
                                 </Row>
                                 <Row>
