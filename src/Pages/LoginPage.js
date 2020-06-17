@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import '../Styles/LoginPage.css';
 import { Link } from 'react-router-dom'
+import SignUpForm from '../Components/SignUpForm'
 
 class LoginPage extends Component {
     
@@ -59,7 +60,8 @@ class LoginPage extends Component {
                         </Col>
                         <Col lg={2}></Col>
                         <Col lg={5} id="signUpDiv" className="form-div border top-padding-5 display-block">
-                            <form method="POST" id="signUpForm">
+                            <SignUpForm/>
+                            {/*<form method="POST" id="signUpForm">
                                 <Form.Row>
                                     <Col lg={{offset: 3, span: 5}}>
                                         <input type="text" name="email" placeholder="E-Mail"></input>
@@ -80,7 +82,7 @@ class LoginPage extends Component {
                                         <input type="submit" value="Sign Up"></input>
                                     </Col>
                                 </Form.Row>
-                            </form>
+                            </form>*/}
                         </Col>
                     </Row>
                 </Container>

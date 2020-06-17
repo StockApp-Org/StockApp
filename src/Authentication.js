@@ -18,7 +18,6 @@ export default class Authentication {
             .then(response => response.json())
             .then(data => {
                 if(data != null) {
-                console.log('auth');
                 let expiresAt = JSON.stringify(new Date().addHours(6));
                 localStorage.setItem('current_user', JSON.stringify({
                     userId: data.userId,
@@ -31,7 +30,8 @@ export default class Authentication {
                     shares: data.userShares
                     }));
                     localStorage.setItem('expires_at', expiresAt);
-                    resolve(data);                }
+                    resolve(data);
+                }
             });
         });
     };
