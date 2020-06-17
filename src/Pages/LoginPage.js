@@ -4,16 +4,8 @@ import '../Styles/LoginPage.css';
 import { Link } from 'react-router-dom'
 
 class LoginPage extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            signedIn: 0
-        }
-    }
     
-    signIn(e) {
+    async signIn(e) {
         e.preventDefault();
         var email= e.target["email"].value
         var password = e.target["loginPassword"].value;
@@ -21,34 +13,14 @@ class LoginPage extends Component {
         var formData = new FormData();
         formData.append('Email', email);
         formData.append('Password', password);
-
-        var req = {
-            method: 'POST',
-            //headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: formData
-        };
-
-        fetch("https://localhost:5001/user/SignIn", req)
-        .then(response => response.json())
-        .then(data => {
-            if (data > 0) {
-                this.setState({signedIn: data});
-                this.props.history.push({
-                    pathname: '/homepage',
-                    userId: data
-                }
-                );
+        await this.props.auth.SignIn(formData)
+        if (JSON.parse(localStorage.getItem('current_user')) != null) {
+                window.location = "/homepage";
             }
             else {
-                var loginEmailEl = document.getElementById('loginEmail');
-                var loginPasswordEl = document.getElementById('loginPassword');
-                loginEmailEl.value = '';
-                loginEmailEl.classList.add('failed');
-                loginPasswordEl.value = '';
-                loginPasswordEl.classList.add('failed');
+
             }
-        });
-    }
+        }
 
     render() {
     return (

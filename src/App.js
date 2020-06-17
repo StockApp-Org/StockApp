@@ -9,19 +9,21 @@ import Footer from './Components/Footer'
 import SettingsPage from './Pages/SettingsPage'
 import PasswordPage from './Pages/PasswordPage'
 import PreferencesPage from './Pages/PreferencesPage'
+import Authentication from './Authentication';
 
 const notFound = () => (<><h1>404</h1><Link to="/">Go back</Link></>)
 const MenuWithRouter = withRouter(Menu)
+const auth = new Authentication();
 const App = () => {
     return (
       <div className="router">
        <Header />
        <BrowserRouter>
           <div className="menuWithPageContainer">
-              <MenuWithRouter />
+              <MenuWithRouter auth={auth}/>
                     <div className="pageContent">
                         <Switch>
-                            <Route path="/" component={LoginPage} exact={true} />
+                            <Route path="/" render={() => <LoginPage auth={auth}/>} exact={true} />
                             <Route path="/homepage" component={HomePage} exact={true}/>
                             <Route path="/settings" component={SettingsPage} exact={true}/>
                             <Route path="/passwordchange" component={PasswordPage} exact={true}/>

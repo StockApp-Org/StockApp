@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Container, Row, Col, Toast, Button, Spinner} from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Container, Row, Col, Toast, Button} from 'react-bootstrap';
 import '../Styles/HomePage.css';
 import  { Pie, Cell, PieChart, Label } from 'recharts';
 import { scaleOrdinal } from 'd3-scale';
@@ -10,7 +10,7 @@ import defaultProfile from '../Images/profileDefault.png'
 let HomePage = (props) => {
 
     const colors = scaleOrdinal(schemeCategory10).range();
-    const [userId, setUserId] = useState(props.location.userId);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('current_user')));
     const [showToast, setShowToast] = useState(true);
     const toggleToast = () => setShowToast(!showToast);
     const dummyData = [
@@ -48,7 +48,7 @@ let HomePage = (props) => {
                         <Col lg={3} md={5} sm={12}>
                             <Toast show={showToast} onClose={toggleToast}>
                                 <Toast.Header>
-                                    <h5>Hello</h5>
+                                    <h5>Hello {user.fullName}</h5>
                                 </Toast.Header>
                             </Toast>
                         </Col>
@@ -66,12 +66,12 @@ let HomePage = (props) => {
                             </Row>
                             <Row>
                                 <Col lg={4}>
-                                    <img src={defaultProfile} id="profileImg" alt=""></img>
+                                    <img src={user.imgUrl == null ? defaultProfile : user.imgUrl} id="profileImg" alt=""></img>
                                 </Col>
                                 <Col lg={8}>
                                     <Row>
                                         <Col>
-                                            <h3>Name:</h3>
+                                            <h3>{user.fullName}</h3>
                                         </Col>
                                     </Row>
                                     <Row>
@@ -81,7 +81,7 @@ let HomePage = (props) => {
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <p>Person/Org Nr here</p>
+                                            <p>{user.personNr}/{user.orgNr}</p>
                                         </Col>
                                     </Row>
                                 </Col>
