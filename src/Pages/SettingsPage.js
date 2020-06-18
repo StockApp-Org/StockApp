@@ -35,7 +35,6 @@ const SettingsPage = () => {
             setPersonNr(user.personNr);
             setFirstName(full[0]);
             setLastName(full[1]);
-            console.log(user.address);
         },[userDataArr]);
         
         const handleChange = (e) => {
@@ -51,12 +50,57 @@ const SettingsPage = () => {
                 u[e.target.name] = e.target.value;
             }
             setUserDataArr([u]);
-            console.log(u);
     };
 
     const handleSubmit = (e) => {
+
+        patchInfoUser();
+        patchInfoUserAddress();
+
         e.preventDefault();
     };
+    const patchInfoUser = () => {
+        var formData = new FormData();
+        formData.append("userId", userDataArr[0].userId)
+        formData.append("email",  email);
+        formData.append("phoneNumber", phoneNumber);
+        formData.append("firstName", firstName);
+        formData.append("lastName", lastName);
+        formData.append("personNr", personNr);
+
+
+        var req = {
+            method: 'PATCH',
+            body: formData
+        };
+
+        fetch("https://localhost:5001/user", req)
+        .then(response => response.json())
+        .then(data => console.log(data, "patch"))
+        ;
+    }    
+    const patchInfoUserAddress = () => {
+        var formData = new FormData();
+        formData.append("userId", userDataArr[0].userId)
+        formData.append("addressRow1", addressState);
+        formData.append("city", cityState);
+        formData.append("zipCode", zipCodeState);
+
+        var req = {
+            method: 'PATCH',
+            body: formData
+        };
+
+        try{
+            fetch("https://localhost:5001/user/address", req)
+            .then(response => console.log(response))
+            .then(data => console.log(data, "patch address"))
+            ;
+        } catch(err){
+            console.log(err.message);
+        }
+
+    }
     return (
     <div className="settingsPageAll">
     <h3>Settings</h3>
@@ -91,7 +135,7 @@ const SettingsPage = () => {
                <label>Phone number</label><br></br>
                <input onChange={handleChange} name="phone" value={phoneNumber}></input><br></br>
                <label>Email</label><br></br>
-               <input onChange={handleChange} value={email}></input>
+               <input onChange={handleChange} name="email" value={email}></input>
                <input type="submit"></input>
            </form>
        </div>
