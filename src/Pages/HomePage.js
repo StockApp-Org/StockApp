@@ -1,41 +1,45 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {NavLink} from 'react-router-dom'
 import {Container, Row, Col, Toast, Button} from 'react-bootstrap';
 import '../Styles/HomePage.css';
-import  { Pie, Cell, PieChart, Label } from 'recharts';
+import  { Pie, Cell, PieChart, Label, ResponsiveContainer } from 'recharts';
 import { scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import defaultProfile from '../Images/profileDefault.png'
 
-
 let HomePage = (props) => {
 
     const colors = scaleOrdinal(schemeCategory10).range();
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('current_user')));
+    const user = JSON.parse(localStorage.getItem('current_user'));
     const [showToast, setShowToast] = useState(true);
     const toggleToast = () => setShowToast(!showToast);
-    const dummyData = [
-        {name: "Group 1", value: 100},
-        {name: "Group 2", value: 200},
-        {name: "Group 3", value: 500},
-        {name: "Group 4", value: 900}
-    ];
+    const [pieData, setPieData] = useState(null);
+    const [data, setData] = useState(null);
 
-    
-    /*useEffect(() => {
-        fetch("https://localhost:5001/user/"+userId)
-        .then(response => response.json())
-        .then(data => {
-            setUser(data)
-            setLoading(false);
-        });
-    }, [isLoading, user, userId]);*/
+    useEffect(() => {
+        GetUserShareData(user.userId);
+    }, []);
+
+    const GetUserShareData = (userId) => {
+        return new Promise(resolve => {
+            fetch("https://localhost:5001/Data/User/"+userId)
+            .then(response => response.json())
+            .then(data => {
+                setData(data);
+                var pieData = data.map(e => ({ name: e.companyName, value: e.shareCount}));
+                setPieData(pieData);
+                });
+            resolve(1);
+            }
+        )
+    }
 
     const renderLabelContent = (props) => {
         const { value, name, x, y, midAngle } = props;
-      
         return (
+          
           <g transform={`translate(${x}, ${y})`} textAnchor={ (midAngle < -90 || midAngle >= 90) ? 'end' : 'start'}>
-            <text x={0} y={0}>{`${name}: ${value}`}</text> 
+            <text fill="#ffebcd" x={0} y={0}>{`${name}: ${value}`}</text> 
           </g>
         );
     }
@@ -46,7 +50,7 @@ let HomePage = (props) => {
             <Col id="mainContentColumn">
                     <Row>
                         <Col lg={3} md={5} sm={12}>
-                            <Toast show={showToast} onClose={toggleToast}>
+                            <Toast show={showToast} onClose={toggleToast} delay={3000} autohide>
                                 <Toast.Header>
                                     <h5>Hello {user.fullName}</h5>
                                 </Toast.Header>
@@ -60,8 +64,10 @@ let HomePage = (props) => {
                                 <Col lg={4}>
                                     <h4>My Profile</h4>
                                 </Col>
-                                <Col lg={{offset: 4, span: 4}}>
-                                    <Button variant="secondary">Edit</Button>
+                                <Col lg={{offset: 6, span: 2}}>
+                                    <Button variant="secondary">
+                                        <NavLink exact={true} to="/settings">Edit</NavLink>
+                                    </Button>
                                 </Col>
                             </Row>
                             <Row>
@@ -86,6 +92,53 @@ let HomePage = (props) => {
                                     </Row>
                                 </Col>
                             </Row>
+                            <Row>
+                                <Container fluid>
+                                    <Row>
+                                        <h3>Contact Details</h3>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <p>Email Address:</p>
+                                        </Col>
+                                        <Col>
+                                            <p>{user.email}</p>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <p>Telephone:</p>
+                                        </Col>
+                                        <Col>
+                                            <p>{user.phone}</p>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <p>Address:</p>
+                                        </Col>
+                                        <Col>
+                                            <p>{user.address[0].addressRow1}</p>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <p>Zip Code:</p>
+                                        </Col>
+                                        <Col>
+                                            <p>{user.address[0].zipCode}</p>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <p>City:</p>
+                                        </Col>
+                                        <Col>
+                                            <p>{user.address[0].city}</p>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </Row>
                         </Container>
                     </Col>
                     <Col lg={6} md={8}>
@@ -94,36 +147,36 @@ let HomePage = (props) => {
                                     <Col lg={5}>
                                         <h4>My Portfolio</h4>
                                     </Col>
-                                    <Col lg={{offset: 3, span: 4}}>
+                                    <Col lg={{offset: 5, span: 2}}>
                                         <Button variant="secondary">Details</Button>
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col lg={12}>
-                                    <PieChart width={400} height={300} className="pieChart">
+                                    <Col lg={12} className="pieChart">
+                                    <ResponsiveContainer>
+                                    <PieChart width={600} height={400}>
                                         <Pie
-                                        data={dummyData}
+                                        data={pieData}
                                         dataKey="value"
-                                        cx={200}
-                                        cy={150}
+                                        cx={400}
+                                        cy={175}
                                         startAngle={180}
                                         endAngle={-180}
                                         innerRadius={60}
-                                        outerRadius={80}
+                                        outerRadius={100}
                                         label={renderLabelContent}
-
+                                        labelLine={false}
                                         isAnimationActive={true}
                                         >
                                         {
-                                            dummyData.map((entry, index) => (
+                                            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((entry, index) => (
                                             <Cell key={index} fill={colors[index % 10]}/>
                                             ))
                                         }
+                                        <Label value="Your Stock" position="center"/>
                                         </Pie>
-                                        <Label width={50} position="center">
-                                            PieChart!
-                                        </Label>
                                     </PieChart>
+                                    </ResponsiveContainer>
                                     </Col>
                                 </Row>
                             </Container>
