@@ -6,6 +6,10 @@
     padding-bottom: 15px;
 }
 
+a {
+    color: #ffe9c7 !important;
+}
+
 #profileImg {
     height: 150px;
     width: 150px;
