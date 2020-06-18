@@ -18,24 +18,28 @@ let HomePage = (props) => {
 
     useEffect(() => {
         GetUserShareData(user.userId);
-    }, [])
+    }, []);
 
     const GetUserShareData = (userId) => {
-        fetch("https://localhost:5001/Data/User/"+userId)
-        .then(response => response.json())
-        .then(data => {
-            setData(data);
-            var pieData = data.map(e => ({ name: e.companyName, value: e.shareCount}));
-            setPieData(pieData);
-        });
+        return new Promise(resolve => {
+            fetch("https://localhost:5001/Data/User/"+userId)
+            .then(response => response.json())
+            .then(data => {
+                setData(data);
+                var pieData = data.map(e => ({ name: e.companyName, value: e.shareCount}));
+                setPieData(pieData);
+                });
+            resolve(1);
+            }
+        )
     }
 
     const renderLabelContent = (props) => {
         const { value, name, x, y, midAngle } = props;
-      
         return (
+          
           <g transform={`translate(${x}, ${y})`} textAnchor={ (midAngle < -90 || midAngle >= 90) ? 'end' : 'start'}>
-            <text position="insideStart" fill="#ffebcd">{`${name}: ${value}`}</text>
+            <text fill="#ffebcd" x={0} y={0}>{`${name}: ${value}`}</text> 
           </g>
         );
     }
@@ -46,7 +50,7 @@ let HomePage = (props) => {
             <Col id="mainContentColumn">
                     <Row>
                         <Col lg={3} md={5} sm={12}>
-                            <Toast show={showToast} onClose={toggleToast} delay={1700} autohide>
+                            <Toast show={showToast} onClose={toggleToast} delay={3000} autohide>
                                 <Toast.Header>
                                     <h5>Hello {user.fullName}</h5>
                                 </Toast.Header>
@@ -103,6 +107,14 @@ let HomePage = (props) => {
                                     </Row>
                                     <Row>
                                         <Col>
+                                            <p>Telephone:</p>
+                                        </Col>
+                                        <Col>
+                                            <p>{user.phone}</p>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
                                             <p>Address:</p>
                                         </Col>
                                         <Col>
@@ -153,8 +165,8 @@ let HomePage = (props) => {
                                         innerRadius={60}
                                         outerRadius={100}
                                         label={renderLabelContent}
+                                        labelLine={false}
                                         isAnimationActive={true}
-                                        animationBegin={200}
                                         >
                                         {
                                             [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((entry, index) => (

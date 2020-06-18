@@ -27,6 +27,7 @@ export default class Authentication {
                     orgNr: data.orgNr,
                     imgUrl: data.imgUrl,
                     address: data.userAddress,
+                    phone: data.phoneNumber,
                     shares: data.userShares
                     }));
                     localStorage.setItem('expires_at', expiresAt);
