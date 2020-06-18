@@ -17,6 +17,14 @@ const SettingsPage = () => {
     
     useEffect(() => {
             const user = userDataArr[0];
+            if(!user.address[0]){
+                const emptyAddress = {
+                    addressRow1: "",
+                    zipCode: "",
+                    city: ""
+                }
+                user.address[0] = emptyAddress;
+            }
             const {addressRow1, zipCode, city} = user.address[0];
             const full = user.fullName.split(' ');
             setZipCode(zipCode);
@@ -81,7 +89,7 @@ const SettingsPage = () => {
                    </div>
                </div>
                <label>Phone number</label><br></br>
-               <input onChange={handleChange} name="phoneNumber" value={phoneNumber}></input><br></br>
+               <input onChange={handleChange} name="phone" value={phoneNumber}></input><br></br>
                <label>Email</label><br></br>
                <input onChange={handleChange} value={email}></input>
                <input type="submit"></input>
