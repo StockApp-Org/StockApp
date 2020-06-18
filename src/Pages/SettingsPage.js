@@ -23,7 +23,7 @@ const SettingsPage = () => {
             setAddress(addressRow1);
             setCity(city);
             setEmail(user.email);
-            setPhoneNumber("0000000000");
+            setPhoneNumber(user.phone);
             setPersonNr(user.personNr);
             setFirstName(full[0]);
             setLastName(full[1]);
