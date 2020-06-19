@@ -11,6 +11,7 @@ import defaultProfile from '../Images/profileDefault.png'
 
 let HomePage = (props) => {
 
+    /* This is just a comment to test workflow setup */
     const colors = scaleOrdinal(schemeCategory10).range();
     const user = JSON.parse(localStorage.getItem('current_user'));
     const [showToast, setShowToast] = useState(true);
