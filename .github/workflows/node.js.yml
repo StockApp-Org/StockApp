@@ -20,8 +20,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - run: mkdir -p stockapp/artifact
-    - run: echo hello > path/to/artifact/world.txt
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
