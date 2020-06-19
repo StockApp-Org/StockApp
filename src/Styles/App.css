@@ -1,0 +1,21 @@
+
+
+header {
+  height: 75px;
+  text-align: center;
+  color: #ffebcd;
+  text-shadow: 1px 1px 1px white;
+}
+footer{
+  text-align: center;
+}
+
+.pageContent{
+  display: flex;
+  width: 100%;
+  color: #ffebcd !important;
+}
+.menuWithPageContainer{
+  display: flex;
+  align-content: stretch;
+}

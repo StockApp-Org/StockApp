@@ -19,10 +19,15 @@ input[type="submit"] {
     border-radius: 10px;
 }
 
+.failed {
+    background-color: indianred;
+}
+
 .form-row {
     padding-bottom: 3px;
 }
 
-a {
+/* Jag satte din page i en klass "loginPageContainer för annars ändrades alla <a> taggar globalt */
+.loginPageContainer a {
     color: white !important;
 }
