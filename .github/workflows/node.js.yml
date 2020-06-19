@@ -29,6 +29,6 @@ jobs:
     - uses: actions/upload-artifact@v2
       if: success()
       with:
-        name: stockapp-artifact
-        path: stockapp/artifact/
+        name: build
+        path: build/
   
