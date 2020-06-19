@@ -15,7 +15,6 @@ const PreferencesPage = () => {
 
     const handleClick = () => {
         setPreferences(preferences.concat(inputData));
-        console.log(inputData);
     }
     const handleChange = (e) => {
         setInputData(e.target.value);

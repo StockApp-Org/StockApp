@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Preferences = (props) => {
-    console.log(localStorage.getItem('current_user'))
 
 
 
