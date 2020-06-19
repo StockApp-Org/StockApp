@@ -120,7 +120,7 @@ let HomePage = (props) => {
                                             <p>Address:</p>
                                         </Col>
                                         <Col>
-                                            <p>{user.address[0].addressRow1}</p>
+                                            <p>{user.address[0] && user.address[0].addressRow1}</p>
                                         </Col>
                                     </Row>
                                     <Row>
@@ -128,7 +128,7 @@ let HomePage = (props) => {
                                             <p>Zip Code:</p>
                                         </Col>
                                         <Col>
-                                            <p>{user.address[0].zipCode}</p>
+                                            <p>{user.address[0] && user.address[0].zipCode}</p>
                                         </Col>
                                     </Row>
                                     <Row>
@@ -136,7 +136,7 @@ let HomePage = (props) => {
                                             <p>City:</p>
                                         </Col>
                                         <Col>
-                                            <p>{user.address[0].city}</p>
+                                            <p>{user.address[0] && user.address[0].city}</p>
                                         </Col>
                                     </Row>
                                 </Container>
