@@ -54,14 +54,15 @@ const SettingsPage = () => {
             setUserDataArr([u]);
     };
 
-    const handleSubmit = (e) => {
+    async function handleSubmit (e) {
 
-        patchInfoUser();
-        patchInfoUserAddress();
+        await patchInfoUser();
+        await patchInfoUserAddress();
 
         e.preventDefault();
     };
-    const patchInfoUser = () => {
+
+    async function patchInfoUser () {
         var formData = new FormData();
         formData.append("userId", userDataArr[0].userId)
         formData.append("email",  email);
@@ -76,39 +77,9 @@ const SettingsPage = () => {
             body: formData
         };
 
-        fetch(ApiUrlWithPort+'/user', req)
-        .then(response => response.json())
-        .then(data => {
-            localStorage.setItem('current_user', JSON.stringify({
-                userId: data.userId,
-                fullName: data.firstName + ' ' + data.lastName,
-                email: data.email,
-                personNr: data.personNr,
-                orgNr: data.orgNr,
-                imgUrl: data.imgUrl,
-                address: data.userAddress,
-                phone: data.phoneNumber,
-                shares: data.userShares
-                }));
-            console.log(data, "patch")
-        })
-        ;
-    }    
-    const patchInfoUserAddress = () => {
-        var formData = new FormData();
-        formData.append("userId", userDataArr[0].userId)
-        formData.append("addressRow1", addressState);
-        formData.append("city", cityState);
-        formData.append("zipCode", zipCodeState);
-
-        var req = {
-            method: 'PATCH',
-            body: formData
-        };
-
-        try{
-            fetch(ApiUrlWithPort+"/user/address", req)
-            .then(response => console.log(response))
+        return new Promise(resolve => {
+            fetch(ApiUrlWithPort+'/user', req)
+            .then(response => response.json())
             .then(data => {
                 localStorage.setItem('current_user', JSON.stringify({
                     userId: data.userId,
@@ -121,9 +92,45 @@ const SettingsPage = () => {
                     phone: data.phoneNumber,
                     shares: data.userShares
                     }));
-                console.log(data, "patch address")
+                    console.log(data, "patch")
+                    resolve(data);
+        });
+
+        })
+    }    
+    async function patchInfoUserAddress() {
+        var formData = new FormData();
+        formData.append("userId", userDataArr[0].userId)
+        formData.append("addressRow1", addressState);
+        formData.append("city", cityState);
+        formData.append("zipCode", zipCodeState);
+
+        var req = {
+            method: 'PATCH',
+            body: formData
+        };
+
+        try{
+            return new Promise(resolve => {
+                fetch(ApiUrlWithPort+"/user/address", req)
+                .then(response => console.log(response))
+                .then(data => {
+                    localStorage.setItem('current_user', JSON.stringify({
+                        userId: data.userId,
+                        fullName: data.firstName + ' ' + data.lastName,
+                        email: data.email,
+                        personNr: data.personNr,
+                        orgNr: data.orgNr,
+                        imgUrl: data.imgUrl,
+                        address: data.userAddress,
+                        phone: data.phoneNumber,
+                        shares: data.userShares
+                        }));
+                    console.log(data, "patch address")
+                    resolve(data);
+                });
             })
-            ;
+            
         } catch(err){
             console.log(err.message);
         }
