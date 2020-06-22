@@ -1,3 +1,5 @@
+import Config from './Config/config.json'
+
 export default class Authentication {
 
     SignIn = (formData) => {
@@ -14,7 +16,7 @@ export default class Authentication {
         };
 
         return new Promise(resolve => {
-            fetch("https://localhost:5001/user/SignIn", req)
+            fetch(Config.ApiUrl+":"+Config.ApiPort+"/user/SignIn", req)
             .then(response => response.json())
             .then(data => {
                 if(data != null) {

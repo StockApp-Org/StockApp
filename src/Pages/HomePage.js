@@ -25,7 +25,7 @@ let HomePage = (props) => {
 
     const GetUserShareData = (userId) => {
         return new Promise(resolve => {
-            fetch("https://localhost:5001/Data/User/"+userId)
+            fetch("http://192.168.0.101:5050/Data/User/"+userId)
             .then(response => response.json())
             .then(data => {
                 setData(data);
