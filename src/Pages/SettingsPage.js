@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import SettingsNav from '../Components/SettingsNav'
 import defaultProfile from '../Images/profileDefault.png'
 import '../Styles/SettingsPage.css'
+import Config from '../Config/config.json';
 
 const SettingsPage = () => {
 
+    const ApiUrlWithPort = Config.ApiUrl+':'+Config.ApiPort;
     const [userDataArr, setUserDataArr] = useState([JSON.parse(localStorage.getItem('current_user'))]);
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
@@ -74,9 +76,22 @@ const SettingsPage = () => {
             body: formData
         };
 
-        fetch("https://localhost:5001/user", req)
+        fetch(ApiUrlWithPort+'/user', req)
         .then(response => response.json())
-        .then(data => console.log(data, "patch"))
+        .then(data => {
+            localStorage.setItem('current_user', JSON.stringify({
+                userId: data.userId,
+                fullName: data.firstName + ' ' + data.lastName,
+                email: data.email,
+                personNr: data.personNr,
+                orgNr: data.orgNr,
+                imgUrl: data.imgUrl,
+                address: data.userAddress,
+                phone: data.phoneNumber,
+                shares: data.userShares
+                }));
+            console.log(data, "patch")
+        })
         ;
     }    
     const patchInfoUserAddress = () => {
@@ -92,9 +107,22 @@ const SettingsPage = () => {
         };
 
         try{
-            fetch("https://localhost:5001/user/address", req)
+            fetch(ApiUrlWithPort+"/user/address", req)
             .then(response => console.log(response))
-            .then(data => console.log(data, "patch address"))
+            .then(data => {
+                localStorage.setItem('current_user', JSON.stringify({
+                    userId: data.userId,
+                    fullName: data.firstName + ' ' + data.lastName,
+                    email: data.email,
+                    personNr: data.personNr,
+                    orgNr: data.orgNr,
+                    imgUrl: data.imgUrl,
+                    address: data.userAddress,
+                    phone: data.phoneNumber,
+                    shares: data.userShares
+                    }));
+                console.log(data, "patch address")
+            })
             ;
         } catch(err){
             console.log(err.message);

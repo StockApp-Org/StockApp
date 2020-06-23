@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Form, Col} from 'react-bootstrap'
+import Config from '../Config/config.json';
 
 class SignUpForm extends Component {
     
@@ -37,7 +38,7 @@ class SignUpForm extends Component {
         };
 
         return new Promise(resolve => {
-            fetch('https://localhost:5001/user', req)
+            fetch(Config.ApiUrl+':'+Config.ApiPort+'/user', req)
             .then(response => response.json())
             .then(data => {
                 if(data != null) {
