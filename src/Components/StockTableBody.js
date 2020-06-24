@@ -35,6 +35,7 @@ let StockTableBody = () => {
                     <td>{row.shareCount}</td>
                     <td>{row.netWorth + ".00"}</td>
                     <td>{row.industryName}</td>
+                    <td>{row.sharePercent + " %"}</td>
                 </tr>
             ))   
         }

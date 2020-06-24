@@ -14,6 +14,7 @@ let PortfolioPage = () => {
                         <th>Share Count</th>
                         <th>Worth</th>
                         <th>Industry</th>
+                        <th>Ownership %</th>
                     </tr>
                 </thead>
                 <StockTableBody/>
