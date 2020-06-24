@@ -11,7 +11,6 @@ import defaultProfile from '../Images/profileDefault.png'
 
 let HomePage = (props) => {
 
-    /* This is just a comment to test workflow setup */
     const colors = scaleOrdinal(schemeCategory10).range();
     const user = JSON.parse(localStorage.getItem('current_user'));
     const [showToast, setShowToast] = useState(true);
@@ -151,7 +150,9 @@ let HomePage = (props) => {
                                         <h4>My Portfolio</h4>
                                     </Col>
                                     <Col lg={{offset: 5, span: 2}}>
-                                        <Button variant="secondary">Details</Button>
+                                        <Button variant="secondary">
+                                            <NavLink exact={true} to="/portfolio">Details</NavLink>
+                                        </Button>
                                     </Col>
                                 </Row>
                                 <Row>
