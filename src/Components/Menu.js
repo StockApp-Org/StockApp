@@ -15,7 +15,7 @@ import { NavLink } from 'react-router-dom'
             <div id="MenuContainer">
                 <h3>Menu</h3>
                 <NavLink activeClassName="menuActive" to="/homepage">Home page</NavLink>
-                <NavLink activeClassName="menuActive" to="/mypage">My page</NavLink>
+                <NavLink activeClassName="menuActive" to="/portfolio">My Portfolio</NavLink>
                 <NavLink activeClassName="menuActive" to="/settings">Settings</NavLink>
                 <NavLink activeClassName="menuActive" to="/" onClick={SignOut} exact={true}>Log out</NavLink>
                                                
