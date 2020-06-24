@@ -8,6 +8,9 @@ header {
 }
 footer{
   text-align: center;
+  position: fixed;
+  bottom: 5px;
+  margin-left: 45%;
 }
 
 .pageContent{
