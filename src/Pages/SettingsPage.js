@@ -3,6 +3,7 @@ import SettingsNav from '../Components/SettingsNav'
 import defaultProfile from '../Images/profileDefault.png'
 import '../Styles/SettingsPage.css'
 import Config from '../Config/config.json';
+import Message from '../Components/Message';
 
 const SettingsPage = () => {
 
@@ -16,6 +17,17 @@ const SettingsPage = () => {
     const [cityState, setCity] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
+
+    const [userLoading, setUserLoading] = useState(false);    
+    const [addressLoading, setAddressLoading] = useState(false);   
+    
+    const [updateRequested, setUpdateRequested] = useState(false);
+
+    const [message, setMessage] = useState({
+        title: "",
+        message: "",
+        className: ""
+    });
     
     useEffect(() => {
             const user = userDataArr[0];
@@ -57,7 +69,9 @@ const SettingsPage = () => {
     async function handleSubmit (e) {
 
         e.preventDefault();
-
+        setUpdateRequested(true);
+        setAddressLoading(true);
+        setUserLoading(true);
         await patchInfoUser();
         await patchInfoUserAddress();
 
@@ -80,7 +94,16 @@ const SettingsPage = () => {
 
         return new Promise(resolve => {
             fetch(ApiUrlWithPort+'/user', req)
-            .then(response => response.json())
+            .then(response => {
+                setMessage({
+                    title: "Success!",
+                    message: "User info was updated!",
+                    className: "fail"
+                });
+
+                return(
+                response.json());
+            })
             .then(data => {
                 localStorage.setItem('current_user', JSON.stringify({
                     userId: data.userId,
@@ -94,7 +117,17 @@ const SettingsPage = () => {
                     shares: data.userShares
                     }));
                     console.log(data, "patch")
+                    setUserLoading(false);
+
                     resolve(data);
+        })
+        .catch(err => {
+            setUserLoading(false);
+            setMessage({
+                title: "Failed",
+                message: err.message,
+                className: "fail"
+            })
         });
 
         })
@@ -111,22 +144,37 @@ const SettingsPage = () => {
             body: formData
         };
 
-        try{
+        
             return new Promise(resolve => {
                 fetch(ApiUrlWithPort+"/user/address", req)
-                .then(response => response.json())
+                .then(response => {
+                    setMessage({
+                        title: "Success!",
+                        message: "User info was updated!",
+                        className: "success"
+                    });
+    
+                    return(
+                    response.json());
+                })
                 .then(data => {
                     var currUser = JSON.parse(localStorage.getItem('current_user'));
                     currUser.address = [data];
                     localStorage.setItem('current_user', JSON.stringify(currUser));
                     console.log(data, currUser, "patch address")
+                    setAddressLoading(false);
                     resolve(data);
+
+                })
+                .catch(err => {
+                    setMessage({
+                        title: "Failed",
+                        message: err.message,
+                        className: "fail"
+                    })
+                    setAddressLoading(false);
                 });
             })
-            
-        } catch(err){
-            console.log(err.message);
-        }
 
     }
     return (
@@ -164,8 +212,20 @@ const SettingsPage = () => {
                <input onChange={handleChange} name="phone" value={phoneNumber}></input><br></br>
                <label>Email</label><br></br>
                <input onChange={handleChange} name="email" value={email}></input>
+
                <input type="submit"></input>
+               <div className="messageBox">
+               {updateRequested && (addressLoading && userLoading ? <p>Loading ... </p> : 
+                                                                <Message 
+                                                                    title={message.title}
+                                                                    message={message.message}
+                                                                    className={message.className}
+                                                                />)}
+               </div>
+               
+               
            </form>
+           
        </div>
    </div>
     )
