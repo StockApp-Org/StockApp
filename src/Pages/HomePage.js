@@ -2,49 +2,39 @@
 /* eslint-disable no-unused-vars */
 import React, {useState, useEffect} from 'react';
 import {NavLink} from 'react-router-dom'
-import {Container, Row, Col, Toast, Button} from 'react-bootstrap';
+import {Container, Row, Col, Toast, Button } from 'react-bootstrap';
 import '../Styles/HomePage.css';
-import  { Pie, Cell, PieChart, Label, ResponsiveContainer } from 'recharts';
+import  { Pie, Cell, PieChart, Label, ResponsiveContainer, Tooltip } from 'recharts';
 import { scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import defaultProfile from '../Images/profileDefault.png'
+import Config from '../Config/config.json'
 
 let HomePage = (props) => {
 
-    /* This is just a comment to test workflow setup */
+    const ApiUrlWithPort = Config.ApiUrl + ':' + Config.ApiPort;
     const colors = scaleOrdinal(schemeCategory10).range();
     const user = JSON.parse(localStorage.getItem('current_user'));
     const [showToast, setShowToast] = useState(true);
     const toggleToast = () => setShowToast(!showToast);
     const [pieData, setPieData] = useState(null);
-    const [data, setData] = useState(null);
 
     useEffect(() => {
         GetUserShareData(user.userId);
     }, []);
 
+
     const GetUserShareData = (userId) => {
         return new Promise(resolve => {
-            fetch("http://192.168.0.101:5050/Data/User/"+userId)
+            fetch(ApiUrlWithPort + "/Data/User/" + userId)
             .then(response => response.json())
             .then(data => {
-                setData(data);
                 var pieData = data.map(e => ({ name: e.companyName, value: e.shareCount}));
                 setPieData(pieData);
                 });
             resolve(1);
             }
         )
-    }
-
-    const renderLabelContent = (props) => {
-        const { value, name, x, y, midAngle } = props;
-        return (
-          
-          <g transform={`translate(${x}, ${y})`} textAnchor={ (midAngle < -90 || midAngle >= 90) ? 'end' : 'start'}>
-            <text fill="#ffebcd" x={0} y={0}>{`${name}: ${value}`}</text> 
-          </g>
-        );
     }
 
     return (
@@ -151,7 +141,9 @@ let HomePage = (props) => {
                                         <h4>My Portfolio</h4>
                                     </Col>
                                     <Col lg={{offset: 5, span: 2}}>
-                                        <Button variant="secondary">Details</Button>
+                                        <Button variant="secondary">
+                                            <NavLink exact={true} to="/portfolio">Details</NavLink>
+                                        </Button>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -161,14 +153,12 @@ let HomePage = (props) => {
                                         <Pie
                                         data={pieData}
                                         dataKey="value"
-                                        cx={400}
+                                        cx={350}
                                         cy={175}
                                         startAngle={180}
                                         endAngle={-180}
                                         innerRadius={60}
                                         outerRadius={100}
-                                        label={renderLabelContent}
-                                        labelLine={false}
                                         isAnimationActive={true}
                                         >
                                         {
@@ -178,6 +168,7 @@ let HomePage = (props) => {
                                         }
                                         <Label value="Your Stock" position="center"/>
                                         </Pie>
+                                        <Tooltip offset={15} />
                                     </PieChart>
                                     </ResponsiveContainer>
                                     </Col>

@@ -25,6 +25,10 @@ a {
     float: left;
 }
 
+.recharts-tooltip-wrapper {
+    /*width: 300px;*/
+}
+
 #MyInfoContainer, #portfolioOverviewSection{
     display: flex;
     flex-direction: column;
