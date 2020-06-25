@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Container, Row, Col, Table, Button, Modal} from 'react-bootstrap'
 import StockTableBody from '../Components/StockTableBody'
-import BuyModal from '../Components/BuyModal';
+import ModalTable from '../Components/ModalTable';
 import '../Styles/PortfolioPage.css';
 
 let PortfolioPage = () => {
@@ -11,13 +11,12 @@ let PortfolioPage = () => {
     const handleClose = () => setShow(false);
 
     useEffect(() => {
-        console.log(isModalShowing)
     }, [isModalShowing])
 
     return(
         <Container id="portfoliotable">
             <Row id="tableRow">
-                <Table bordered striped hover variant="dark">
+                <Table id="currentShareTable" striped hover variant="dark">
                     <thead>
                         <tr>
                             <th>Company</th>
@@ -27,7 +26,7 @@ let PortfolioPage = () => {
                             <th>Ownership %</th>
                         </tr>
                     </thead>
-                    <StockTableBody/>
+                    <StockTableBody closed={isModalShowing}/>
                 </Table>
             </Row>
             <Row id="buttonRow">
@@ -35,15 +34,19 @@ let PortfolioPage = () => {
                     <Button variant="secondary" onClick={handleShow}>Buy More!</Button>
                 </Col>
             </Row>
-            <Modal show={isModalShowing} onHide={handleClose}>
-                <Modal.Title>
-                    <h4>This is a header</h4>
-                </Modal.Title>
+            <Modal
+                size="xl"
+                centered backdrop="static"
+                show={isModalShowing}
+                onHide={handleClose}
+                dialogClassName="shareModal"
+                scrollable={true}
+                >
                 <Modal.Body>
-                    <p>This is a body</p>
+                    <ModalTable/>
                 </Modal.Body>
                 <Modal.Footer>
-                    <p>This is a footer</p>
+                    <Button variant="secondary" onClick={handleClose}>Close</Button>
                 </Modal.Footer>
             </Modal>
         </Container>

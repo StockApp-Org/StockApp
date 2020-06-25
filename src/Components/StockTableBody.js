@@ -2,10 +2,9 @@
 import React, {useState, useEffect} from 'react';
 import Config from '../Config/config.json'
 
-let StockTableBody = () => {
+let StockTableBody = ({closed}) => {
 
     const GetUserShareData = (userId) => {
-
         return new Promise(resolve => {
             fetch(ApiUrlWithPort+'/Data/User/'+userId)
             .then(response => response.json())
@@ -24,7 +23,7 @@ let StockTableBody = () => {
 
     useEffect(() => {
         GetUserShareData(UserId);
-    }, [])
+    }, [closed])
 
     return(
         <tbody>
@@ -33,7 +32,7 @@ let StockTableBody = () => {
                 <tr>
                     <td>{row.companyName}</td>
                     <td>{row.shareCount}</td>
-                    <td>{row.netWorth + ".00"}</td>
+                    <td>{row.netWorth}</td>
                     <td>{row.industryName}</td>
                     <td>{row.sharePercent + " %"}</td>
                 </tr>
