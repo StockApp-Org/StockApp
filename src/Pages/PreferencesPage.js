@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import Navbar from '../Components/SettingsNav'
 import '../Styles/PreferencesPage.css'
@@ -11,7 +12,6 @@ const PreferencesPage = () => {
     const [preferences, setPreferences] = useState([]);
     const [inputData, setInputData] = useState();
     useEffect(() => {
-        //setPreferences(["Construction", "Health Care", "Energy", "Materials", "Financials", "Telecom", "Information Technology", "Real Estate"])
         GetIndustries();
     },[]);
     

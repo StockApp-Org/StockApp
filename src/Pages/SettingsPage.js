@@ -56,10 +56,11 @@ const SettingsPage = () => {
 
     async function handleSubmit (e) {
 
+        e.preventDefault();
+
         await patchInfoUser();
         await patchInfoUserAddress();
 
-        e.preventDefault();
     };
 
     async function patchInfoUser () {
@@ -113,20 +114,12 @@ const SettingsPage = () => {
         try{
             return new Promise(resolve => {
                 fetch(ApiUrlWithPort+"/user/address", req)
-                .then(response => console.log(response))
+                .then(response => response.json())
                 .then(data => {
-                    localStorage.setItem('current_user', JSON.stringify({
-                        userId: data.userId,
-                        fullName: data.firstName + ' ' + data.lastName,
-                        email: data.email,
-                        personNr: data.personNr,
-                        orgNr: data.orgNr,
-                        imgUrl: data.imgUrl,
-                        address: data.userAddress,
-                        phone: data.phoneNumber,
-                        shares: data.userShares
-                        }));
-                    console.log(data, "patch address")
+                    var currUser = JSON.parse(localStorage.getItem('current_user'));
+                    currUser.address = [data];
+                    localStorage.setItem('current_user', JSON.stringify(currUser));
+                    console.log(data, currUser, "patch address")
                     resolve(data);
                 });
             })
