@@ -3,7 +3,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import '../Styles/LoginPage.css';
 import SignUpForm from '../Components/SignUpForm'
 import LoginForm from '../Components/LoginForm';
-import Logo from '../Images/logo.png'
 
 let LoginPage = (props) => {
     

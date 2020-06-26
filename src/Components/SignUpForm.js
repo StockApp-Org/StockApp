@@ -1,21 +1,43 @@
-import React from 'react';
-import {Form, Col} from 'react-bootstrap'
+import React, {useState} from 'react';
+import {Form, Col, Modal, Button} from 'react-bootstrap'
 import Config from '../Config/config.json';
 
 let SignUpForm = () => {
     
-    async function SignUpSubmit(e) {
+    const [signUpData, setSignUpData] = useState(null);
+    const [showModal, setShow] = useState(false)
+    const handleShow = (e) => {
         e.preventDefault();
-        var email = e.target["email"].value;
-        var password = e.target["signUpPassword"].value;
-        var firstName = e.target["firstName"].value;
-        var lastName = e.target["lastName"].value;
+        setShow(true);
+        setSignUpData({
+            "email": e.target["email"].value,
+            "password": e.target["signUpPassword"].value,
+            "firstName": e.target["firstName"].value,
+            "lastName": e.target["lastName"].value
+        })
+    }
+    const handleClose = () => {
+        setShow(false)
+        SignUpSubmit(signUpData)
+    }
+
+    const handleDeny = () => {
+        setShow(false)
+        setSignUpData(null);
+        var formEls = document.querySelectorAll("#signUpForm input");
+        var elementArr = Array.from(formEls);
+        elementArr.map(el => (
+            el.value = ""
+        ));
+    }
+
+    async function SignUpSubmit() {
 
         var formData = new FormData();
-        formData.append('Email', email);
-        formData.append('Password', password);
-        formData.append('FirstName', firstName);
-        formData.append('LastName', lastName);
+        formData.append('Email', signUpData.email);
+        formData.append('Password', signUpData.password);
+        formData.append('FirstName', signUpData.firstName);
+        formData.append('LastName', signUpData.lastName);
 
         await SignUpDb(formData);
 
@@ -62,8 +84,8 @@ let SignUpForm = () => {
     };
 
         return (
-            
-                <form onSubmit={SignUpSubmit} id="signUpForm">
+                <React.Fragment>
+                <form onSubmit={handleShow} id="signUpForm">
                     <Form.Row>
                         <Col lg={{offset: 3, span: 5}}>
                             <input type="text" name="firstName" placeholder="First Name"></input>
@@ -95,7 +117,30 @@ let SignUpForm = () => {
                         </Col>
                     </Form.Row>
                 </form>
-            
+                <Modal show={showModal} onHide={handleClose}>
+                    <Modal.Body>
+                        <h3>GDPR Consent</h3>
+                        <p>
+                            In accordance with European Data Protection Laws, we are required to inform you that by
+                            signing up for this website, you are providing us with consent to store personal information
+                            about you, such as First Name, Last Name, address of residence, phone number, e-mail address and
+                            other various data.
+                        </p>
+                        <p>
+                            You can always request a full file on the data we store in relation to your account by going to
+                            the Settings page and accessing the GDPR section.
+                            There you will also find an option to completely remove all of your data from the database.
+                            However, this will then not allow you to use our service any further.
+                        </p>
+                        <p>
+                            Please use the below buttons to confirm or deny your consent to the above.
+                            Thank you.
+                        </p>
+                        <Button variant="success" onClick={handleClose}>Confirm</Button>
+                        <Button variant="danger" onClick={handleDeny}>Deny</Button>
+                    </Modal.Body>
+                </Modal>
+                </React.Fragment>
         )
 }
 
