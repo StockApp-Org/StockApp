@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Form, Col} from 'react-bootstrap'
 import Config from '../Config/config.json';
 
-class SignUpForm extends Component {
+let SignUpForm = () => {
     
-    async SignUpSubmit(e) {
+    async function SignUpSubmit(e) {
         e.preventDefault();
         var email = e.target["email"].value;
         var password = e.target["signUpPassword"].value;
@@ -17,14 +17,14 @@ class SignUpForm extends Component {
         formData.append('FirstName', firstName);
         formData.append('LastName', lastName);
 
-        await this.SignUpDb(formData);
+        await SignUpDb(formData);
 
         if (localStorage.getItem('current_user') != null) {
             window.location = '/homepage';
         }
     }
 
-    SignUpDb(FormData) {
+    function SignUpDb(FormData) {
         
         // eslint-disable-next-line no-extend-native
         Date.prototype.addHours = function(h) {
@@ -61,10 +61,9 @@ class SignUpForm extends Component {
         });
     };
 
-    render() {
         return (
-            <div>
-                <form onSubmit={this.SignUpSubmit.bind(this)} id="signUpForm">
+            
+                <form onSubmit={SignUpSubmit} id="signUpForm">
                     <Form.Row>
                         <Col lg={{offset: 3, span: 5}}>
                             <input type="text" name="firstName" placeholder="First Name"></input>
@@ -96,9 +95,8 @@ class SignUpForm extends Component {
                         </Col>
                     </Form.Row>
                 </form>
-            </div>
+            
         )
-    }
 }
 
 export default SignUpForm;

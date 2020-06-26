@@ -7,10 +7,6 @@
     padding-top: 5px;
 }
 
-.header {
-    color: white;
-}
-
 input[type="text"], input[type="password"] {
     border-radius: 5px;
 }
@@ -27,7 +23,15 @@ input[type="submit"] {
     padding-bottom: 3px;
 }
 
-/* Jag satte din page i en klass "loginPageContainer för annars ändrades alla <a> taggar globalt */
+#signUpForm, #loginForm {
+    width: 100%
+}
+
 .loginPageContainer a {
     color: white !important;
+    left: 50px;
+}
+
+.loginPageContainer h1 {
+    text-align: center;
 }
