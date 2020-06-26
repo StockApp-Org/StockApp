@@ -41,6 +41,15 @@ box-shadow: 0px 0px 33px 18px rgba(115,114,115,1);
   display: flex;
 }
 
+.settingsContent input[type=submit] {
+    justify-content: center;
+    font-weight: 900;
+    width: 50%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+
 .settingsContent input:focus {
     background-color: #6e4848;
     outline: none;

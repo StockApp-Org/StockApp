@@ -66,16 +66,54 @@ const SettingsPage = () => {
             setUserDataArr([u]);
     };
 
+    const validateEmail = (input) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(input).toLowerCase());
+    }
+
+    const validatePersonNumber = (input) => {
+        const re = /^(19|20)?[0-9]{6}[- ]?[0-9]{4}$/;
+        return re.test(String(input).toLowerCase());
+    }
+    const validatePhoneNumber = (input) => {
+        const re = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/
+        return re.test(String(input).toLowerCase());
+    }
+    
+    const checkInput = () => {
+
+        if (
+         validateEmail(email) &&
+         validatePersonNumber(personNr) &&
+         validatePhoneNumber(phoneNumber)){
+             return true
+         } else {
+
+             return false;
+         }
+    }
+
     async function handleSubmit (e) {
-
-        e.preventDefault();
-        setUpdateRequested(true);
-        setAddressLoading(true);
-        setUserLoading(true);
-        await patchInfoUser();
-        await patchInfoUserAddress();
-
+        if (checkInput()){
+            console.log("here")
+            e.preventDefault();
+            setUpdateRequested(true);
+            setAddressLoading(true);
+            setUserLoading(true);
+            await patchInfoUser();
+            await patchInfoUserAddress();
+            setTimeout(() => {
+                setUpdateRequested(false);
+            }, 5000);
+        }
+        else {
+            e.preventDefault();
+            alert("Invalid input");
+        }
     };
+
+
+
 
     async function patchInfoUser () {
         var formData = new FormData();
@@ -132,6 +170,7 @@ const SettingsPage = () => {
 
         })
     }    
+    
     async function patchInfoUserAddress() {
         var formData = new FormData();
         formData.append("userId", userDataArr[0].userId)
@@ -175,6 +214,7 @@ const SettingsPage = () => {
                     setAddressLoading(false);
                 });
             })
+
 
     }
     return (
