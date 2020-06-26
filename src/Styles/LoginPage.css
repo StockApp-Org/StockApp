@@ -27,6 +27,17 @@ input[type="submit"] {
     width: 100%
 }
 
+.loginPageContainer {
+    background-image: url(../Images/logo.png);
+    background-size: 40%;
+    background-position: 50% 70%;
+    background-repeat: no-repeat;
+    background-attachment: relative;
+    animation: pageFade 2s;
+    height: 90vh;
+    width: auto;
+}
+
 .loginPageContainer a {
     color: white !important;
     left: 50px;
@@ -34,4 +45,9 @@ input[type="submit"] {
 
 .loginPageContainer h1 {
     text-align: center;
+}
+
+@keyframes pageFade {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
