@@ -12,8 +12,14 @@ let LoginForm = (props) => {
         formData.append('Email', email);
         formData.append('Password', password);
         await props.auth.SignIn(formData)
-        if (JSON.parse(localStorage.getItem('current_user')) != null) {
+        if (localStorage.getItem('current_user') != null) {
                 window.location = "/homepage";
+            }
+            else {
+                document.getElementById("loginForm").classList.add("shake-animation");
+                setTimeout(() => {
+                    document.getElementById("loginForm").classList.remove("shake-animation");
+                }, 1000)
             }
         }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import React, {useState} from 'react';
 import {Form, Col, Modal, Button} from 'react-bootstrap'
 import Config from '../Config/config.json';
@@ -5,16 +6,73 @@ import Config from '../Config/config.json';
 let SignUpForm = () => {
     
     const [signUpData, setSignUpData] = useState(null);
+    const [emailValid, setEmailValid] = useState(false);
+    const [passwordValid, setPasswordValid] = useState(false);
     const [showModal, setShow] = useState(false)
+
+    const checkInput = () => {
+
+        if (emailValid && passwordValid) {
+            return true
+         } else {
+             return false;
+         }
+    }
+
+    const validateEmail = (input) => {
+        var el = document.getElementById("signUpEmail");
+        console.log(el);
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(re.test(String(input).toLowerCase())) {
+            setEmailValid(true)
+            el.classList.toggle("not-failed")
+        }
+        else {
+            setEmailValid(false)
+            el.classList.toggle("failed")
+        }
+    }
+
+    const validatePassword = (ogPassword ,confirmPassword) => {
+        
+        var els = Array.from(document.getElementsByClassName("signUpPassword"));
+
+        if(ogPassword === confirmPassword) {
+            setPasswordValid(true);
+            els.map(el => (
+                el.classList.toggle("not-failed")
+            ))
+        }
+        else {
+            setPasswordValid(false);
+            els.map(el => (
+                el.classList.toggle("failed")
+            ))
+        }
+    }
+    
+
     const handleShow = (e) => {
         e.preventDefault();
-        setShow(true);
+        
         setSignUpData({
             "email": e.target["email"].value,
             "password": e.target["signUpPassword"].value,
+            "confirmPassword": e.target["verifyPassword"].value,
             "firstName": e.target["firstName"].value,
             "lastName": e.target["lastName"].value
-        })
+        });
+
+        if(checkInput()) {
+            setShow(true);
+        }
+        else {
+            document.getElementById("signUpForm").classList.add("shake-animation");
+            setTimeout(() => {
+                document.getElementById("signUpForm").classList.remove("shake-animation");
+            }, 1000);
+        }
+
     }
     const handleClose = () => {
         setShow(false)
@@ -98,17 +156,17 @@ let SignUpForm = () => {
                     </Form.Row>
                     <Form.Row>
                         <Col lg={{offset: 3, span: 5}}>
-                            <input type="text" name="email" placeholder="E-Mail"></input>
+                            <input type="text" id="signUpEmail" onBlur={validateEmail} name="email" placeholder="E-Mail"></input>
                         </Col>
                     </Form.Row>
                     <Form.Row>
                         <Col lg={{offset: 3, span: 5}}>
-                            <input type="password" name="signUpPassword" placeholder="Password"></input>
+                            <input type="password" className="signUpPassword" name="signUpPassword" placeholder="Password"></input>
                         </Col>
                     </Form.Row>
                     <Form.Row>
                         <Col lg={{offset: 3, span: 5}}>
-                            <input type="password" name="verifyPassword" placeholder="Verify Password"></input>
+                            <input type="password" className="signUpPassword" onBlur={validatePassword} name="verifyPassword" placeholder="Verify Password"></input>
                         </Col>
                     </Form.Row>
                     <Form.Row>

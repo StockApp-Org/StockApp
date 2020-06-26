@@ -17,9 +17,9 @@ export default class Authentication {
 
         return new Promise(resolve => {
             fetch(Config.ApiUrl+":"+Config.ApiPort+"/user/SignIn", req)
-            .then(response => response.json())
+            .then(response => response.text())
             .then(data => {
-                if(data != null) {
+                if(data !== "" && data != null) {
                 let expiresAt = JSON.stringify(new Date().addHours(6));
                 localStorage.setItem('current_user', JSON.stringify({
                     userId: data.userId,
@@ -33,8 +33,8 @@ export default class Authentication {
                     shares: data.userShares
                     }));
                     localStorage.setItem('expires_at', expiresAt);
-                    resolve(data);
                 }
+                resolve(data);
             });
         });
     };
