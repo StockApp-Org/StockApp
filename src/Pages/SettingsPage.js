@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import React, { useEffect, useState } from 'react'
 import SettingsNav from '../Components/SettingsNav'
 import defaultProfile from '../Images/profileDefault.png'
