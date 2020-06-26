@@ -183,13 +183,13 @@ const SettingsPage = () => {
        <div className="settingsContent">
        <SettingsNav />
            <img src={defaultProfile} style={{height: 90, width: 90}} alt="profilePicture"></img>
-           <form onSubmit={handleSubmit}>
+           <form className="changeSettingsForm" onSubmit={handleSubmit}>
                <div className="settingsRow">
-                   <div>
+                   <div className="rowItem">
                        <label>First Name</label><br></br>
                        <input onChange={handleChange} name="firstName" value={firstName}></input>
                    </div>
-                   <div>
+                   <div className="rowItem">
                        <label>Last name</label><br></br>
                        <input onChange={handleChange} name="lastName" value={lastName}></input>
                    </div>
@@ -199,11 +199,11 @@ const SettingsPage = () => {
                <label>Address</label><br></br>
                <input onChange={handleChange} value={addressState} name="addressRow1"></input><br></br>
                <div className="settingsRow">
-                   <div>
+                   <div className="rowItem">
                        <label>Zip code</label><br></br> 
                        <input onChange={handleChange} name="zipCode" value={zipCodeState}></input>
                    </div>
-                   <div>
+                   <div className="rowItem">
                        <label>City</label><br></br>
                        <input onChange={handleChange} name="city" value={cityState}></input>
                    </div>
