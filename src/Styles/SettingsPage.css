@@ -1,10 +1,7 @@
 .settingsRow{
     display: flex;
-
     flex-direction: row;
     flex-wrap: wrap;
-
-
 } 
 
 .rowItem {
@@ -22,10 +19,6 @@
     -webkit-box-shadow: 0px 0px 33px 18px rgba(115,114,115,1);
 -moz-box-shadow: 0px 0px 33px 18px rgba(115,114,115,1);
 box-shadow: 0px 0px 33px 18px rgba(115,114,115,1);
-
-
-
-
 }
 
 .settingsContent input {
