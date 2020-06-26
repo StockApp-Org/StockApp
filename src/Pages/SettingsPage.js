@@ -3,6 +3,7 @@ import SettingsNav from '../Components/SettingsNav'
 import defaultProfile from '../Images/profileDefault.png'
 import '../Styles/SettingsPage.css'
 import Config from '../Config/config.json';
+import Message from '../Components/Message';
 
 const SettingsPage = () => {
 
@@ -16,6 +17,17 @@ const SettingsPage = () => {
     const [cityState, setCity] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
+
+    const [userLoading, setUserLoading] = useState(false);    
+    const [addressLoading, setAddressLoading] = useState(false);   
+    
+    const [updateRequested, setUpdateRequested] = useState(false);
+
+    const [message, setMessage] = useState({
+        title: "",
+        message: "",
+        className: ""
+    });
     
     useEffect(() => {
             const user = userDataArr[0];
@@ -54,14 +66,54 @@ const SettingsPage = () => {
             setUserDataArr([u]);
     };
 
+    const validateEmail = (input) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(input).toLowerCase());
+    }
+
+    const validatePersonNumber = (input) => {
+        const re = /^(19|20)?[0-9]{6}[- ]?[0-9]{4}$/;
+        return re.test(String(input).toLowerCase());
+    }
+    const validatePhoneNumber = (input) => {
+        const re = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/
+        return re.test(String(input).toLowerCase());
+    }
+    
+    const checkInput = () => {
+
+        if (
+         validateEmail(email) &&
+         validatePersonNumber(personNr) &&
+         validatePhoneNumber(phoneNumber)){
+             return true
+         } else {
+
+             return false;
+         }
+    }
+
     async function handleSubmit (e) {
-
-        e.preventDefault();
-
-        await patchInfoUser();
-        await patchInfoUserAddress();
-
+        if (checkInput()){
+            console.log("here")
+            e.preventDefault();
+            setUpdateRequested(true);
+            setAddressLoading(true);
+            setUserLoading(true);
+            await patchInfoUser();
+            await patchInfoUserAddress();
+            setTimeout(() => {
+                setUpdateRequested(false);
+            }, 5000);
+        }
+        else {
+            e.preventDefault();
+            alert("Invalid input");
+        }
     };
+
+
+
 
     async function patchInfoUser () {
         var formData = new FormData();
@@ -80,7 +132,16 @@ const SettingsPage = () => {
 
         return new Promise(resolve => {
             fetch(ApiUrlWithPort+'/user', req)
-            .then(response => response.json())
+            .then(response => {
+                setMessage({
+                    title: "Success!",
+                    message: "User info was updated!",
+                    className: "fail"
+                });
+
+                return(
+                response.json());
+            })
             .then(data => {
                 localStorage.setItem('current_user', JSON.stringify({
                     userId: data.userId,
@@ -94,11 +155,22 @@ const SettingsPage = () => {
                     shares: data.userShares
                     }));
                     console.log(data, "patch")
+                    setUserLoading(false);
+
                     resolve(data);
+        })
+        .catch(err => {
+            setUserLoading(false);
+            setMessage({
+                title: "Failed",
+                message: err.message,
+                className: "fail"
+            })
         });
 
         })
     }    
+    
     async function patchInfoUserAddress() {
         var formData = new FormData();
         formData.append("userId", userDataArr[0].userId)
@@ -111,22 +183,38 @@ const SettingsPage = () => {
             body: formData
         };
 
-        try{
+        
             return new Promise(resolve => {
                 fetch(ApiUrlWithPort+"/user/address", req)
-                .then(response => response.json())
+                .then(response => {
+                    setMessage({
+                        title: "Success!",
+                        message: "User info was updated!",
+                        className: "success"
+                    });
+    
+                    return(
+                    response.json());
+                })
                 .then(data => {
                     var currUser = JSON.parse(localStorage.getItem('current_user'));
                     currUser.address = [data];
                     localStorage.setItem('current_user', JSON.stringify(currUser));
                     console.log(data, currUser, "patch address")
+                    setAddressLoading(false);
                     resolve(data);
+
+                })
+                .catch(err => {
+                    setMessage({
+                        title: "Failed",
+                        message: err.message,
+                        className: "fail"
+                    })
+                    setAddressLoading(false);
                 });
             })
-            
-        } catch(err){
-            console.log(err.message);
-        }
+
 
     }
     return (
@@ -135,13 +223,13 @@ const SettingsPage = () => {
        <div className="settingsContent">
        <SettingsNav />
            <img src={defaultProfile} style={{height: 90, width: 90}} alt="profilePicture"></img>
-           <form onSubmit={handleSubmit}>
+           <form className="changeSettingsForm" onSubmit={handleSubmit}>
                <div className="settingsRow">
-                   <div>
+                   <div className="rowItem">
                        <label>First Name</label><br></br>
                        <input onChange={handleChange} name="firstName" value={firstName}></input>
                    </div>
-                   <div>
+                   <div className="rowItem">
                        <label>Last name</label><br></br>
                        <input onChange={handleChange} name="lastName" value={lastName}></input>
                    </div>
@@ -151,11 +239,11 @@ const SettingsPage = () => {
                <label>Address</label><br></br>
                <input onChange={handleChange} value={addressState} name="addressRow1"></input><br></br>
                <div className="settingsRow">
-                   <div>
+                   <div className="rowItem">
                        <label>Zip code</label><br></br> 
                        <input onChange={handleChange} name="zipCode" value={zipCodeState}></input>
                    </div>
-                   <div>
+                   <div className="rowItem">
                        <label>City</label><br></br>
                        <input onChange={handleChange} name="city" value={cityState}></input>
                    </div>
@@ -164,8 +252,20 @@ const SettingsPage = () => {
                <input onChange={handleChange} name="phone" value={phoneNumber}></input><br></br>
                <label>Email</label><br></br>
                <input onChange={handleChange} name="email" value={email}></input>
+
                <input type="submit"></input>
+               <div className="messageBox">
+               {updateRequested && (addressLoading && userLoading ? <p>Loading ... </p> : 
+                                                                <Message 
+                                                                    title={message.title}
+                                                                    message={message.message}
+                                                                    className={message.className}
+                                                                />)}
+               </div>
+               
+               
            </form>
+           
        </div>
    </div>
     )
