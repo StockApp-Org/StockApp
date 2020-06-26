@@ -11,6 +11,7 @@ import PasswordPage from './Pages/PasswordPage'
 import PreferencesPage from './Pages/PreferencesPage'
 import Authentication from './Authentication';
 import PortfolioPage from './Pages/PortfolioPage';
+import GdprPage from './Pages/GdprPage';
 
 const notFound = () => (<><h1>404</h1><Link to="/">Go back</Link></>)
 const MenuWithRouter = withRouter(Menu)
@@ -30,6 +31,7 @@ const App = () => {
                             <Route path="/portfolio" component={PortfolioPage} exact={true}/>
                             <Route path="/passwordchange" component={PasswordPage} exact={true}/>
                             <Route path="/prefrences" component={PreferencesPage} exact={true}/>
+                            <Route path="/gdpr" component={GdprPage} exact={true}/>
                             <Route component={notFound}/>
                         </Switch>
                    </div>
