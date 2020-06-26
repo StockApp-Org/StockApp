@@ -25,3 +25,11 @@ ul {
     width: 600px;
     
 }
+.deleteForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.deleteForm input[type=submit]{
+    
+}
