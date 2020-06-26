@@ -117,7 +117,7 @@ let SignUpForm = () => {
                         </Col>
                     </Form.Row>
                 </form>
-                <Modal show={showModal} onHide={handleClose}>
+                <Modal id="gdprModal" show={showModal} onHide={handleClose} backdrop="static" keyboard={false}>
                     <Modal.Body>
                         <h3>GDPR Consent</h3>
                         <p>
