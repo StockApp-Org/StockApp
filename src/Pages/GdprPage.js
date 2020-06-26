@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../Components/SettingsNav'
 import Config from '../Config/config.json'
 import '../Styles/GdprPage.css';
