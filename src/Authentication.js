@@ -22,7 +22,6 @@ export default class Authentication {
                 if(data !== "" && data != null) {
                 let expiresAt = JSON.stringify(new Date().addHours(6));
                 var jsonData = JSON.parse(data);
-                console.log(jsonData);
                 localStorage.setItem('current_user', JSON.stringify({
                     userId: jsonData.userId,
                     fullName: jsonData.firstName + ' ' + jsonData.lastName,
