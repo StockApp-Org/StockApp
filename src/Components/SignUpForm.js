@@ -11,7 +11,7 @@ let SignUpForm = () => {
     const [showModal, setShow] = useState(false)
 
     const checkInput = () => {
-
+        return true
         if (emailValid && passwordValid) {
             return true
          } else {
@@ -23,7 +23,12 @@ let SignUpForm = () => {
         var el = document.getElementById("signUpEmail");
         console.log(el.value);
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+<<<<<<< HEAD
         if(re.test(String(el.value).toLowerCase())) {
+=======
+        
+        if(re.test(String(input).toLowerCase())) {
+>>>>>>> some ccs
             setEmailValid(true)
             el.classList.add("not-failed")
         }
@@ -41,6 +46,7 @@ let SignUpForm = () => {
         if(ogPassword === confirmPassword) {
             setPasswordValid(true);
             els.map(el => (
+<<<<<<< HEAD
                 el.classList.add("not-failed")
             ))
         }
@@ -50,6 +56,18 @@ let SignUpForm = () => {
                 el.classList.add("failed")
             ))
         }
+=======
+                el.classList.toggle("not-failed")
+                ))
+            }
+            else {
+                setPasswordValid(true);
+                els.map(el => (
+                    el.classList.toggle("failed")
+                    ))
+                }
+                console.log("here")
+>>>>>>> some ccs
     }
     
 
