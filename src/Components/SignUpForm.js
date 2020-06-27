@@ -19,34 +19,35 @@ let SignUpForm = () => {
          }
     }
 
-    const validateEmail = (input) => {
+    const validateEmail = () => {
         var el = document.getElementById("signUpEmail");
-        console.log(el);
+        console.log(el.value);
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if(re.test(String(input).toLowerCase())) {
+        if(re.test(String(el.value).toLowerCase())) {
             setEmailValid(true)
-            el.classList.toggle("not-failed")
+            el.classList.add("not-failed")
         }
         else {
             setEmailValid(false)
-            el.classList.toggle("failed")
+            el.classList.add("failed")
         }
     }
 
-    const validatePassword = (ogPassword ,confirmPassword) => {
+    const validatePassword = () => {
         
         var els = Array.from(document.getElementsByClassName("signUpPassword"));
-
+        var ogPassword = els[0].value;
+        var confirmPassword = els[1].value;
         if(ogPassword === confirmPassword) {
             setPasswordValid(true);
             els.map(el => (
-                el.classList.toggle("not-failed")
+                el.classList.add("not-failed")
             ))
         }
         else {
             setPasswordValid(false);
             els.map(el => (
-                el.classList.toggle("failed")
+                el.classList.add("failed")
             ))
         }
     }
