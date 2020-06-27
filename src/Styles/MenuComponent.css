@@ -28,8 +28,11 @@
            color:blanchedalmond
  }
 #MenuContainer{
+    top:0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     padding: 10px;
     width: 150px;    
     background-color: #313131;
