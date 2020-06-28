@@ -39,7 +39,7 @@ return (
             <Navbar />
             <div id="list">
             <Preferences preferences={preferences}/>
-            <input onChange={handleChange}></input>
+            <input type="text" className="addInput" onChange={handleChange}></input>
             <button onClick={handleClick}>Add new sector</button>
             </div>          
         </div>

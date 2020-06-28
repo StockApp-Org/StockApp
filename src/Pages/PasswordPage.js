@@ -6,7 +6,8 @@ import '../Styles/PasswordPage.css'
 import Config from '../Config/config.json';
 
 const PasswordPage = () => {
-    const ApiPortWithUrl = Config.ApiUrl + ':' + Config.ApiPort;
+
+    const ApiUrlWithPort = Config.ApiUrl + ':' + Config.ApiPort;
     const currentUser = JSON.parse(localStorage.getItem('current_user'));
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -15,7 +16,8 @@ const PasswordPage = () => {
 
     const formData = new FormData();
     formData.append("userId", currentUser.userId);
-    formData.append("password", newPassword);
+    formData.append("password", currentPassword);
+    formData.append("passwordSalt", newPassword);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,13 +30,16 @@ const PasswordPage = () => {
             };
     
             return new Promise(resolve => {
-                fetch(ApiPortWithUrl + "/user/changePassword", req)
+                fetch(ApiUrlWithPort + "/user/changePassword", req)
                 .then(response => response.json())
                 .then(data =>{
                     if (data != null){
-                        console.log(data);
-                    }
+                        alert("Success!");
+                    } 
                 })
+                .catch(() => {
+                    alert("Wrong password!");
+                });
             });
         } else {
             setWrongPassword(true);
@@ -56,18 +61,18 @@ const PasswordPage = () => {
         <h3>Change password</h3>
         <div className="passwordContent">
             <Navbar />
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="passwordForm">
 
                     <label>Current password</label><br></br>
                     <input type="password" name="current" onChange={handleChange}></input><br></br>
                     <label>New password</label><br></br>
                     <input type="password" name="new" onChange={handleChange}></input><br></br>
                     <label>Confirm new password</label><br></br>
-                    <input type="submit" name="confirm" onChange={handleChange}></input><br></br>
+                    <input type="password" name="confirm" onChange={handleChange}></input><br></br>
                     <input type="submit"></input>
-                    {wrongPassword ? 
+                    {wrongPassword && (wrongPassword ? 
                         <p style={{color: "red"}}>Wrong password</p> : 
-                        <p style={{color: "#254114"}}>Password has been updated!</p>}
+                        <p style={{color: "#254114"}}>Password has been updated!</p>)}
                     <br></br>
                 </form>
         </div>

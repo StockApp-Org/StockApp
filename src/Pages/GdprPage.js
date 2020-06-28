@@ -82,7 +82,7 @@ let GdprPage = () => {
         <h3>GDPR</h3>
         <div className="gdprContent">
             <Navbar /> 
-            <div>
+            <div className="links">
                 <ul>
                     <li>
                         <a href={ApiUrlWithPort+'/User/Download/'+userId}>Download Your Data</a>
@@ -92,15 +92,15 @@ let GdprPage = () => {
                     </li>
                 </ul>
             </div>
-                        {
-                        deleteUserActive && 
-                        <>
-                        <form className="deleteForm" onSubmit={handleSubmit}>
-                            <label>Password: </label><input name="pw" onChange={handleChange}></input>
-                            <label>Confirm password: </label><input name="cpw" onChange={handleChange}></input>
-                            <input type="submit"></input>
-                        </form>
-                         </>}
+             {
+             deleteUserActive && 
+             <>
+             <form className="deleteForm" onSubmit={handleSubmit}>
+                 <label>Password: </label><input name="pw" type="password"onChange={handleChange}></input>
+                 <label>Confirm password: </label><input type="password" name="cpw" onChange={handleChange}></input>
+                 <input type="submit"></input>
+             </form>
+              </>}
         </div>
     </div>
     )
