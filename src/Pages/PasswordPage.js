@@ -63,7 +63,7 @@ const PasswordPage = () => {
                     <label>New password</label><br></br>
                     <input type="password" name="new" onChange={handleChange}></input><br></br>
                     <label>Confirm new password</label><br></br>
-                    <input type="submit" name="confirm" onChange={handleChange}></input><br></br>
+                    <input type="password" name="confirm" onChange={handleChange}></input><br></br>
                     <input type="submit"></input>
                     {wrongPassword ? 
                         <p style={{color: "red"}}>Wrong password</p> : 
