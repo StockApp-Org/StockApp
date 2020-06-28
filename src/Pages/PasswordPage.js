@@ -3,8 +3,10 @@
 import React, { useState } from 'react'
 import Navbar from '../Components/SettingsNav'
 import '../Styles/PasswordPage.css'
+import Config from '../Config/config.json';
 
 const PasswordPage = () => {
+    const ApiUrlWithPort = Config.ApiUrl + ':' + Config.ApiPort;
     const currentUser = JSON.parse(localStorage.getItem('current_user'));
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -13,7 +15,8 @@ const PasswordPage = () => {
 
     const formData = new FormData();
     formData.append("userId", currentUser.userId);
-    formData.append("password", newPassword);
+    formData.append("password", currentPassword);
+    formData.append("passwordSalt", newPassword);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,13 +29,16 @@ const PasswordPage = () => {
             };
     
             return new Promise(resolve => {
-                fetch("https://localhost:5001/user/changePassword", req)
+                fetch(ApiUrlWithPort + "/user/changePassword", req)
                 .then(response => response.json())
                 .then(data =>{
                     if (data != null){
-                        console.log(data);
-                    }
+                        alert("Success!");
+                    } 
                 })
+                .catch(() => {
+                    alert("Wrong password!");
+                });
             });
         } else {
             setWrongPassword(true);
@@ -57,11 +63,11 @@ const PasswordPage = () => {
                 <form onSubmit={handleSubmit} className="passwordForm">
 
                     <label>Current password</label><br></br>
-                    <input name="current" onChange={handleChange}></input><br></br>
+                    <input type="password" name="current" onChange={handleChange}></input><br></br>
                     <label>New password</label><br></br>
-                    <input name="new" onChange={handleChange}></input><br></br>
+                    <input type="password" name="new" onChange={handleChange}></input><br></br>
                     <label>Confirm new password</label><br></br>
-                    <input name="confirm" onChange={handleChange}></input><br></br>
+                    <input type="password" name="confirm" onChange={handleChange}></input><br></br>
                     <input type="submit"></input>
                     {wrongPassword ? 
                         <p style={{color: "red"}}>Wrong password</p> : 
