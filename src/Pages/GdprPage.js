@@ -9,16 +9,20 @@ let GdprPage = () => {
 
     const ApiUrlWithPort = Config.ApiUrl+':'+Config.ApiPort;
     const user =  JSON.parse(localStorage.getItem('current_user'));
-
-    const userId = user.userId;
+    
     
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
     const [loggedOut, setLoggedOut] = useState(false);
-
-
+    
+    
     const [deleteUserActive, setDeleteUserActive] = useState();
-
+    
+    if (!user){
+        return <Redirect push to="/" />
+    } 
+    
+    const userId = user.userId;
     
     const handleChange = e => {
 
@@ -58,6 +62,8 @@ let GdprPage = () => {
             .then(response => response.json())
             .then(data => {
                 setLoggedOut(true);
+                localStorage.removeItem('current_user');
+                localStorage.removeItem('expires_at');
             })
             .catch(err => {
                 alert("Wrong password!");
@@ -85,7 +91,7 @@ let GdprPage = () => {
             <div className="links">
                 <ul>
                     <li>
-                        <a href={ApiUrlWithPort+'/User/Download/'+userId}>Download Your Data</a>
+                         <a href={ApiUrlWithPort+'/User/Download/'+userId}>Download Your Data</a>
                     </li>
                     <li>
                         <button onClick={handleClick}>Delete your user</button>
