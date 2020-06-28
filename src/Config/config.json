@@ -1,4 +1,4 @@
 {
-    "ApiUrl":"http://localhost",
-    "ApiPort":"5000"
+    "ApiUrl":"http://98.128.173.69",
+    "ApiPort":"5050"
 }
