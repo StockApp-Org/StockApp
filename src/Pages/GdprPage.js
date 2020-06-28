@@ -96,8 +96,8 @@ let GdprPage = () => {
              deleteUserActive && 
              <>
              <form className="deleteForm" onSubmit={handleSubmit}>
-                 <label>Password: </label><input name="pw" onChange={handleChange}></input>
-                 <label>Confirm password: </label><input name="cpw" onChange={handleChange}></input>
+                 <label>Password: </label><input name="pw" type="password"onChange={handleChange}></input>
+                 <label>Confirm password: </label><input type="password" name="cpw" onChange={handleChange}></input>
                  <input type="submit"></input>
              </form>
               </>}

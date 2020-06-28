@@ -69,9 +69,9 @@ const PasswordPage = () => {
                     <label>Confirm new password</label><br></br>
                     <input type="password" name="confirm" onChange={handleChange}></input><br></br>
                     <input type="submit"></input>
-                    {wrongPassword ? 
+                    {wrongPassword && (wrongPassword ? 
                         <p style={{color: "red"}}>Wrong password</p> : 
-                        <p style={{color: "#254114"}}>Password has been updated!</p>}
+                        <p style={{color: "#254114"}}>Password has been updated!</p>)}
                     <br></br>
                 </form>
         </div>
