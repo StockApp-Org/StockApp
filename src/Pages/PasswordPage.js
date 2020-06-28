@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import Navbar from '../Components/SettingsNav'
+import Button from 'react-bootstrap/Button'
 import '../Styles/PasswordPage.css'
 import Config from '../Config/config.json';
 
@@ -69,7 +70,7 @@ const PasswordPage = () => {
                     <input type="password" name="new" onChange={handleChange}></input><br></br>
                     <label>Confirm new password</label><br></br>
                     <input type="password" name="confirm" onChange={handleChange}></input><br></br>
-                    <input type="submit"></input>
+                    <Button variant="secondary" type="submit">Update</Button>
                     {wrongPassword && (wrongPassword ? 
                         <p style={{color: "red"}}>Wrong password</p> : 
                         <p style={{color: "#254114"}}>Password has been updated!</p>)}
