@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Col} from 'react-bootstrap'
+import {Form, Col, Button} from 'react-bootstrap'
 
 let LoginForm = (props) => {
     
@@ -37,7 +37,7 @@ let LoginForm = (props) => {
                 </Form.Row>
                 <Form.Row>
                     <Col lg={{offset: 3, span: 5}}>
-                        <input type="submit" value="Login"></input>
+                        <Button variant="secondary" type="submit">Login</Button>
                     </Col>
                 </Form.Row>
             </form>

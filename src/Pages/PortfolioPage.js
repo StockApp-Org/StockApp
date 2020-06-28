@@ -46,7 +46,7 @@ let PortfolioPage = () => {
                     <ModalTable/>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>Close</Button>
+                    <Button id="modalCloseBtn" variant="secondary" onClick={handleClose}>Close</Button>
                 </Modal.Footer>
             </Modal>
         </Container>

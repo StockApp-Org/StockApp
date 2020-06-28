@@ -65,7 +65,7 @@ let ModalTable = () => {
                             <td>{row.availableShares}</td>
                             <td>
                                 <input type="number" id={"shareAmountInput_" + row.shareId}/>
-                                <Button variant="secondary" onClick={() => PurchaseShare(row.shareId, document.getElementById("shareAmountInput_" + row.shareId).value)}>Buy</Button>
+                                <Button className="buyBtn" variant="secondary" onClick={() => PurchaseShare(row.shareId, document.getElementById("shareAmountInput_" + row.shareId).value)}>Buy</Button>
                             </td>
                         </tr>
                     ))

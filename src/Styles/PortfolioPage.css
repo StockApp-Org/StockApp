@@ -21,6 +21,11 @@ display: flex;
     position: absolute;
     width: 100%;
     bottom: 5px;
+    color: #ffebcd;
+}
+
+#buttonRow button {
+    color: #ffebcd;
 }
 
 .shareModal {
@@ -34,6 +39,14 @@ display: flex;
 
 #buyTable, #currentShareTable {
     border-radius: 10px;
+}
+
+.buyBtn {
+    color: #ffebcd !important;
+}
+
+#modalCloseBtn {
+    color: #ffebcd !important;
 }
 
 .shareModal, .modal-content, .modal-body, .modal-footer{

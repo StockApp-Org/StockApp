@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../Components/SettingsNav'
 import Config from '../Config/config.json'
+import Button from 'react-bootstrap/Button'
 import '../Styles/GdprPage.css';
 import { Redirect } from 'react-router-dom';
 
@@ -32,8 +33,6 @@ let GdprPage = () => {
                 setConfirmPassword(e.target.value);
             }
         }
-        console.log(password);
-        console.log(confirmPassword);
    
 
     const handleClick = () => setDeleteUserActive(true);
@@ -48,15 +47,12 @@ let GdprPage = () => {
         if (user.address[0]){
             userAddress = user.address[0].userId;
         }
-        console.log(userAddress);
         formData.append("passwordSalt", userAddress);
-        console.log(user.address[0])
 
         var req = {
             method: 'DELETE',
             body: formData
         };
-        console.log(user.address);
         
             fetch(ApiUrlWithPort+"/user/delete", req)
             .then(response => response.json())
@@ -91,10 +87,12 @@ let GdprPage = () => {
             <div className="links">
                 <ul>
                     <li>
-                         <a href={ApiUrlWithPort+'/User/Download/'+userId}>Download Your Data</a>
+                         <Button variant="secondary">
+                            <a href={ApiUrlWithPort+'/User/Download/'+userId}>Download Your Data</a>
+                         </Button>
                     </li>
                     <li>
-                        <button onClick={handleClick}>Delete your user</button>
+                        <Button id="deleteFormBtn" variant="secondary" onClick={handleClick}>Delete your user</Button>
                     </li>
                 </ul>
             </div>
@@ -104,7 +102,7 @@ let GdprPage = () => {
              <form className="deleteForm" onSubmit={handleSubmit}>
                  <label>Password: </label><input name="pw" type="password"onChange={handleChange}></input>
                  <label>Confirm password: </label><input type="password" name="cpw" onChange={handleChange}></input>
-                 <input type="submit"></input>
+                 <Button variant="danger" type="submit">Delete</Button>
              </form>
               </>}
         </div>

@@ -5,6 +5,7 @@ import defaultProfile from '../Images/profileDefault.png'
 import '../Styles/SettingsPage.css'
 import Config from '../Config/config.json';
 import Message from '../Components/Message';
+import Button from 'react-bootstrap/Button';
 
 const SettingsPage = () => {
 
@@ -254,10 +255,11 @@ const SettingsPage = () => {
                <label>Email</label><br></br>
                <input onChange={handleChange} name="email" value={email}></input>
 
-               <input type="submit"></input>
+               <Button variant="secondary" type="submit">Update</Button>
                <div className="messageBox">
                {updateRequested && (addressLoading && userLoading ? <p>Loading ... </p> : 
-                                                                <Message 
+                                                                <Message
+                                                                    show={true} 
                                                                     title={message.title}
                                                                     message={message.message}
                                                                     className={message.className}

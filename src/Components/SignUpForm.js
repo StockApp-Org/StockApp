@@ -171,7 +171,7 @@ let SignUpForm = () => {
                     </Form.Row>
                     <Form.Row>
                         <Col lg={{offset: 3, span: 5}}>
-                            <input type="submit" value="Sign Up"></input>
+                            <Button variant="secondary" type="submit">Sign Up</Button>
                         </Col>
                     </Form.Row>
                 </form>

@@ -11,7 +11,7 @@
 -moz-box-shadow: 0px 0px 33px 18px rgba(115,114,115,1);
 box-shadow: 0px 0px 33px 18px rgba(115,114,115,1);
 }
-.preferencesPage{
+.preferencesPage {
     color: #ffe9c7;
     width: 90%;
 }
@@ -23,12 +23,20 @@ box-shadow: 0px 0px 33px 18px rgba(115,114,115,1);
     display: flex;
     flex-direction: column;
 }
+
+.links ul li {
+    padding-top: 5px;
+}
+
 .deleteForm {
     display: flex;
     flex-direction: column;
     width: 50%;
 }
 
+#deleteFormBtn {
+    color: #ffebcd;
+}
 
 .deleteForm input {
     background-color: #b8b8b8;
