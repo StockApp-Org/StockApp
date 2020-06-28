@@ -11,7 +11,6 @@ let SignUpForm = () => {
     const [showModal, setShow] = useState(false)
 
     const checkInput = () => {
-
         if (emailValid && passwordValid) {
             return true
          } else {
