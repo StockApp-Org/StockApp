@@ -3,8 +3,10 @@
 import React, { useState } from 'react'
 import Navbar from '../Components/SettingsNav'
 import '../Styles/PasswordPage.css'
+import Config from '../Config/config.json';
 
 const PasswordPage = () => {
+    const ApiPortWithUrl = Config.ApiUrl + ':' + Config.ApiPort;
     const currentUser = JSON.parse(localStorage.getItem('current_user'));
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -26,7 +28,7 @@ const PasswordPage = () => {
             };
     
             return new Promise(resolve => {
-                fetch("https://localhost:5001/user/changePassword", req)
+                fetch(ApiPortWithUrl + "/user/changePassword", req)
                 .then(response => response.json())
                 .then(data =>{
                     if (data != null){
@@ -57,11 +59,11 @@ const PasswordPage = () => {
                 <form onSubmit={handleSubmit}>
 
                     <label>Current password</label><br></br>
-                    <input name="current" onChange={handleChange}></input><br></br>
+                    <input type="password" name="current" onChange={handleChange}></input><br></br>
                     <label>New password</label><br></br>
-                    <input name="new" onChange={handleChange}></input><br></br>
+                    <input type="password" name="new" onChange={handleChange}></input><br></br>
                     <label>Confirm new password</label><br></br>
-                    <input name="confirm" onChange={handleChange}></input><br></br>
+                    <input type="submit" name="confirm" onChange={handleChange}></input><br></br>
                     <input type="submit"></input>
                     {wrongPassword ? 
                         <p style={{color: "red"}}>Wrong password</p> : 
