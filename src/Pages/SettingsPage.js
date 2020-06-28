@@ -258,7 +258,8 @@ const SettingsPage = () => {
                <Button variant="secondary" type="submit">Update</Button>
                <div className="messageBox">
                {updateRequested && (addressLoading && userLoading ? <p>Loading ... </p> : 
-                                                                <Message 
+                                                                <Message
+                                                                    show={true} 
                                                                     title={message.title}
                                                                     message={message.message}
                                                                     className={message.className}

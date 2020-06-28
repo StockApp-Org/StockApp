@@ -33,8 +33,6 @@ let GdprPage = () => {
                 setConfirmPassword(e.target.value);
             }
         }
-        console.log(password);
-        console.log(confirmPassword);
    
 
     const handleClick = () => setDeleteUserActive(true);
@@ -49,15 +47,12 @@ let GdprPage = () => {
         if (user.address[0]){
             userAddress = user.address[0].userId;
         }
-        console.log(userAddress);
         formData.append("passwordSalt", userAddress);
-        console.log(user.address[0])
 
         var req = {
             method: 'DELETE',
             body: formData
         };
-        console.log(user.address);
         
             fetch(ApiUrlWithPort+"/user/delete", req)
             .then(response => response.json())
