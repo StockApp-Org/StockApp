@@ -54,7 +54,7 @@ const PasswordPage = () => {
         <h3>Change password</h3>
         <div className="passwordContent">
             <Navbar />
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="passwordForm">
 
                     <label>Current password</label><br></br>
                     <input name="current" onChange={handleChange}></input><br></br>
