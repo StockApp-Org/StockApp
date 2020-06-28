@@ -1,3 +1,5 @@
+import Config from './Config/config.json'
+
 export default class Authentication {
 
     SignIn = (formData) => {
@@ -14,25 +16,27 @@ export default class Authentication {
         };
 
         return new Promise(resolve => {
-            fetch("https://localhost:5001/user/SignIn", req)
-            .then(response => response.json())
+            fetch(Config.ApiUrl+":"+Config.ApiPort+"/user/SignIn", req)
+            .then(response => response.text())
             .then(data => {
-                if(data != null) {
+                if(data !== "" && data != null) {
                 let expiresAt = JSON.stringify(new Date().addHours(6));
+                var jsonData = JSON.parse(data);
                 localStorage.setItem('current_user', JSON.stringify({
-                    userId: data.userId,
-                    fullName: data.firstName + ' ' + data.lastName,
-                    email: data.email,
-                    personNr: data.personNr,
-                    orgNr: data.orgNr,
-                    imgUrl: data.imgUrl,
-                    address: data.userAddress,
-                    phone: data.phoneNumber,
-                    shares: data.userShares
-                    }));
+                    userId: jsonData.userId,
+                    fullName: jsonData.firstName + ' ' + jsonData.lastName,
+                    email: jsonData.email,
+                    personNr: jsonData.personNr,
+                    orgNr: jsonData.orgNr,
+                    imgUrl: jsonData.imgUrl,
+                    address: jsonData.userAddress,
+                    phone: jsonData.phoneNumber,
+                    shares: jsonData.userShares
+                    })
+                    );
                     localStorage.setItem('expires_at', expiresAt);
-                    resolve(data);
                 }
+                resolve(data);
             });
         });
     };

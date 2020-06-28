@@ -1,0 +1,33 @@
+.success {
+    color: rgb(43, 255, 0);
+    font-weight: bold;
+}
+
+.success h3 {
+    color: rgb(43, 255, 0);
+    font-weight: bold;
+}
+
+.fail {
+    color: #e42200;
+    font-weight: bold;
+
+}
+
+.fail h3 {
+    color: #e42200;
+    font-weight: bold;
+}
+
+.message {
+    padding: 10px;
+    margin: 15px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    flex-flow: column;
+    width: min-content;
+}

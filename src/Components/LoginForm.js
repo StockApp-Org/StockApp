@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
-import {Form, Col} from 'react-bootstrap'
+import React from 'react'
+import {Form, Col, Button} from 'react-bootstrap'
 
-class LoginForm extends Component {
+let LoginForm = (props) => {
     
-    async signIn(e) {
+    async function signIn(e) {
         e.preventDefault();
         var email= e.target["email"].value
         var password = e.target["loginPassword"].value;
@@ -11,16 +11,20 @@ class LoginForm extends Component {
         var formData = new FormData();
         formData.append('Email', email);
         formData.append('Password', password);
-        await this.props.auth.SignIn(formData)
-        if (JSON.parse(localStorage.getItem('current_user')) != null) {
+        await props.auth.SignIn(formData)
+        if (localStorage.getItem('current_user') != null) {
                 window.location = "/homepage";
+            }
+            else {
+                document.getElementById("loginForm").classList.add("shake-animation");
+                setTimeout(() => {
+                    document.getElementById("loginForm").classList.remove("shake-animation");
+                }, 1000)
             }
         }
 
-    render() {
         return(
-            <div>
-            <form onSubmit={this.signIn.bind(this)} id="loginForm">
+            <form onSubmit={signIn} id="loginForm">
                 <Form.Row>
                     <Col lg={{offset: 3, span: 5}}>
                     <input id="loginEmail" type="text" name="email" placeholder="E-Mail"></input>
@@ -33,13 +37,12 @@ class LoginForm extends Component {
                 </Form.Row>
                 <Form.Row>
                     <Col lg={{offset: 3, span: 5}}>
-                        <input type="submit" value="Login"></input>
+                        <Button variant="secondary" type="submit">Login</Button>
                     </Col>
                 </Form.Row>
             </form>
-            </div>
+
         )
-    }
 }
 
 export default LoginForm;
