@@ -1,4 +1,9 @@
 {
+<<<<<<< HEAD
     "ApiUrl":"https://localhost",
     "ApiPort":"5001"
+=======
+    "ApiUrl":"http://98.128.173.59",
+    "ApiPort":"5050"
+>>>>>>> e45d21492372145b9790018b7b8907d00aa53d3f
 }
