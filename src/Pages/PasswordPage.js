@@ -6,6 +6,7 @@ import '../Styles/PasswordPage.css'
 import Config from '../Config/config.json';
 
 const PasswordPage = () => {
+
     const ApiUrlWithPort = Config.ApiUrl + ':' + Config.ApiPort;
     const currentUser = JSON.parse(localStorage.getItem('current_user'));
     const [currentPassword, setCurrentPassword] = useState("");
